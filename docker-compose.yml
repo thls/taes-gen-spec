@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: .
+    environment:
+      - AI_API_KEY=${AI_API_KEY}
+    volumes:
+      - .:/app
+    network_mode: host
+
+

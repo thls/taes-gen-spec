@@ -1,0 +1,1567 @@
+{
+  "dataset_part": [
+    {
+      "signature": "MicroserviceClient#call_service(service_name, endpoint, method, params, headers, timeout)",
+      "class": "MicroserviceClient",
+      "method": "call_service",
+      "parameters": [
+        {
+          "name": "service_name",
+          "type": "String"
+        },
+        {
+          "name": "endpoint",
+          "type": "String"
+        },
+        {
+          "name": "method",
+          "type": "String"
+        },
+        {
+          "name": "params",
+          "type": "Hash"
+        },
+        {
+          "name": "headers",
+          "type": "Hash"
+        },
+        {
+          "name": "timeout",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "service_name",
+          "comment": "must be a registered microservice name",
+          "kind": "PARAM",
+          "condition": "service_name != nil && service_name != ''"
+        },
+        {
+          "parameter": "endpoint",
+          "comment": "must be a valid API endpoint path starting with /",
+          "kind": "PARAM",
+          "condition": "endpoint.start_with?('/')"
+        },
+        {
+          "parameter": "method",
+          "comment": "must be one of: GET, POST, PUT, DELETE",
+          "kind": "PARAM",
+          "condition": "['GET', 'POST', 'PUT', 'DELETE'].include?(method.upcase)"
+        },
+        {
+          "parameter": "params",
+          "comment": "must be a hash with request parameters",
+          "kind": "PARAM",
+          "condition": "params.is_a?(Hash)"
+        },
+        {
+          "parameter": "headers",
+          "comment": "must be a hash with HTTP headers",
+          "kind": "PARAM",
+          "condition": "headers.is_a?(Hash)"
+        },
+        {
+          "parameter": "timeout",
+          "comment": "must be a positive integer between 1 and 300 seconds",
+          "kind": "PARAM",
+          "condition": "timeout.is_a?(Integer) && timeout > 0 && timeout <= 300"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the service response if the call was successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:status] == 'success'"
+        },
+        {
+          "comment": "a hash with error information if the service call failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:status] == 'error'"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param service_name is empty or not registered",
+          "kind": "THROWS",
+          "condition": "service_name.nil? || service_name == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param endpoint is not a valid path",
+          "kind": "THROWS",
+          "condition": "!endpoint.start_with?('/')"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param method is not a supported HTTP method",
+          "kind": "THROWS",
+          "condition": "!['GET', 'POST', 'PUT', 'DELETE'].include?(method.upcase)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param timeout is not within the allowed range",
+          "kind": "THROWS",
+          "condition": "!timeout.is_a?(Integer) || timeout <= 0 || timeout > 300"
+        },
+        {
+          "exceptionType": "TimeoutError",
+          "comment": "the service call exceeded the specified timeout",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param service_name [String] must be a registered microservice name\n@param endpoint [String] must be a valid API endpoint path starting with /\n@param method [String] must be one of: GET, POST, PUT, DELETE\n@param params [Hash] must be a hash with request parameters\n@param headers [Hash] must be a hash with HTTP headers\n@param timeout [Integer] must be a positive integer between 1 and 300 seconds\n@return [Hash] a hash containing the service response if the call was successful\n@return [Hash] a hash with error information if the service call failed\n@raise [ArgumentError] the param service_name is empty or not registered\n@raise [ArgumentError] the param endpoint is not a valid path\n@raise [ArgumentError] the param method is not a supported HTTP method\n@raise [ArgumentError] the param timeout is not within the allowed range\n@raise [TimeoutError] the service call exceeded the specified timeout"
+    },
+    {
+      "signature": "DataPipeline#process_batch(data_source, transformations, output_format, validation_rules, error_handling)",
+      "class": "DataPipeline",
+      "method": "process_batch",
+      "parameters": [
+        {
+          "name": "data_source",
+          "type": "String"
+        },
+        {
+          "name": "transformations",
+          "type": "Array"
+        },
+        {
+          "name": "output_format",
+          "type": "String"
+        },
+        {
+          "name": "validation_rules",
+          "type": "Hash"
+        },
+        {
+          "name": "error_handling",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "data_source",
+          "comment": "must be a valid data source URI or file path",
+          "kind": "PARAM",
+          "condition": "data_source != nil && data_source != ''"
+        },
+        {
+          "parameter": "transformations",
+          "comment": "must be a non-empty array of transformation function names",
+          "kind": "PARAM",
+          "condition": "transformations.is_a?(Array) && transformations.length > 0"
+        },
+        {
+          "parameter": "output_format",
+          "comment": "must be one of: json, csv, parquet, avro",
+          "kind": "PARAM",
+          "condition": "['json', 'csv', 'parquet', 'avro'].include?(output_format)"
+        },
+        {
+          "parameter": "validation_rules",
+          "comment": "must be a hash with field validation rules",
+          "kind": "PARAM",
+          "condition": "validation_rules.is_a?(Hash)"
+        },
+        {
+          "parameter": "error_handling",
+          "comment": "must be one of: strict, lenient, skip, abort",
+          "kind": "PARAM",
+          "condition": "['strict', 'lenient', 'skip', 'abort'].include?(error_handling)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the processing results with output location if successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:status] == 'completed'"
+        },
+        {
+          "comment": "a hash with partial results and error information if processing failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:status] == 'failed'"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param data_source is empty or invalid",
+          "kind": "THROWS",
+          "condition": "data_source.nil? || data_source == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param transformations is empty or not an array",
+          "kind": "THROWS",
+          "condition": "!transformations.is_a?(Array) || transformations.length == 0"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param output_format is not a supported format",
+          "kind": "THROWS",
+          "condition": "!['json', 'csv', 'parquet', 'avro'].include?(output_format)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param error_handling is not one of the supported strategies",
+          "kind": "THROWS",
+          "condition": "!['strict', 'lenient', 'skip', 'abort'].include?(error_handling)"
+        },
+        {
+          "exceptionType": "IOError",
+          "comment": "the data source cannot be accessed or read",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param data_source [String] must be a valid data source URI or file path\n@param transformations [Array] must be a non-empty array of transformation function names\n@param output_format [String] must be one of: json, csv, parquet, avro\n@param validation_rules [Hash] must be a hash with field validation rules\n@param error_handling [String] must be one of: strict, lenient, skip, abort\n@return [Hash] a hash containing the processing results with output location if successful\n@return [Hash] a hash with partial results and error information if processing failed\n@raise [ArgumentError] the param data_source is empty or invalid\n@raise [ArgumentError] the param transformations is empty or not an array\n@raise [ArgumentError] the param output_format is not a supported format\n@raise [ArgumentError] the param error_handling is not one of the supported strategies\n@raise [IOError] the data source cannot be accessed or read"
+    },
+    {
+      "signature": "AuthenticationService#authenticate_with_mfa(user_id, password, mfa_code, device_id, session_info)",
+      "class": "AuthenticationService",
+      "method": "authenticate_with_mfa",
+      "parameters": [
+        {
+          "name": "user_id",
+          "type": "String"
+        },
+        {
+          "name": "password",
+          "type": "String"
+        },
+        {
+          "name": "mfa_code",
+          "type": "String"
+        },
+        {
+          "name": "device_id",
+          "type": "String"
+        },
+        {
+          "name": "session_info",
+          "type": "Hash"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "user_id",
+          "comment": "must be a valid user identifier",
+          "kind": "PARAM",
+          "condition": "user_id != nil && user_id != ''"
+        },
+        {
+          "parameter": "password",
+          "comment": "must be at least 8 characters long",
+          "kind": "PARAM",
+          "condition": "password != nil && password.length >= 8"
+        },
+        {
+          "parameter": "mfa_code",
+          "comment": "must be a 6-digit numeric code",
+          "kind": "PARAM",
+          "condition": "mfa_code.match?(/^[0-9]{6}$/)"
+        },
+        {
+          "parameter": "device_id",
+          "comment": "must be a valid device identifier UUID format",
+          "kind": "PARAM",
+          "condition": "device_id.match?(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i)"
+        },
+        {
+          "parameter": "session_info",
+          "comment": "must be a hash with session metadata",
+          "kind": "PARAM",
+          "condition": "session_info.is_a?(Hash)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the authentication token and session data if successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:authenticated] == true"
+        },
+        {
+          "comment": "a hash with authentication failure reason if authentication failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:authenticated] == false"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param user_id is empty or invalid",
+          "kind": "THROWS",
+          "condition": "user_id.nil? || user_id == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param password is too short or nil",
+          "kind": "THROWS",
+          "condition": "password.nil? || password.length < 8"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param mfa_code is not a valid 6-digit code",
+          "kind": "THROWS",
+          "condition": "!mfa_code.match?(/^[0-9]{6}$/)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param device_id is not a valid UUID format",
+          "kind": "THROWS",
+          "condition": "!device_id.match?(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i)"
+        },
+        {
+          "exceptionType": "SecurityError",
+          "comment": "too many failed authentication attempts detected",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param user_id [String] must be a valid user identifier\n@param password [String] must be at least 8 characters long\n@param mfa_code [String] must be a 6-digit numeric code\n@param device_id [String] must be a valid device identifier UUID format\n@param session_info [Hash] must be a hash with session metadata\n@return [Hash] a hash containing the authentication token and session data if successful\n@return [Hash] a hash with authentication failure reason if authentication failed\n@raise [ArgumentError] the param user_id is empty or invalid\n@raise [ArgumentError] the param password is too short or nil\n@raise [ArgumentError] the param mfa_code is not a valid 6-digit code\n@raise [ArgumentError] the param device_id is not a valid UUID format\n@raise [SecurityError] too many failed authentication attempts detected"
+    },
+    {
+      "signature": "BlockchainService#create_transaction(from_address, to_address, amount, currency, gas_price, data)",
+      "class": "BlockchainService",
+      "method": "create_transaction",
+      "parameters": [
+        {
+          "name": "from_address",
+          "type": "String"
+        },
+        {
+          "name": "to_address",
+          "type": "String"
+        },
+        {
+          "name": "amount",
+          "type": "Float"
+        },
+        {
+          "name": "currency",
+          "type": "String"
+        },
+        {
+          "name": "gas_price",
+          "type": "Integer"
+        },
+        {
+          "name": "data",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "from_address",
+          "comment": "must be a valid blockchain address format",
+          "kind": "PARAM",
+          "condition": "from_address.match?(/^0x[a-fA-F0-9]{40}$/)"
+        },
+        {
+          "parameter": "to_address",
+          "comment": "must be a valid blockchain address format",
+          "kind": "PARAM",
+          "condition": "to_address.match?(/^0x[a-fA-F0-9]{40}$/)"
+        },
+        {
+          "parameter": "amount",
+          "comment": "must be greater than zero and less than 1000000000",
+          "kind": "PARAM",
+          "condition": "amount > 0 && amount < 1000000000"
+        },
+        {
+          "parameter": "currency",
+          "comment": "must be one of: ETH, BTC, USDT, DAI",
+          "kind": "PARAM",
+          "condition": "['ETH', 'BTC', 'USDT', 'DAI'].include?(currency)"
+        },
+        {
+          "parameter": "gas_price",
+          "comment": "must be a positive integer between 1 and 1000000000000",
+          "kind": "PARAM",
+          "condition": "gas_price.is_a?(Integer) && gas_price > 0 && gas_price <= 1000000000000"
+        },
+        {
+          "parameter": "data",
+          "comment": "must be a hex-encoded string or empty",
+          "kind": "PARAM",
+          "condition": "data == '' || data.match?(/^0x[a-fA-F0-9]*$/)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the transaction hash and confirmation details if successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:tx_hash] != nil"
+        },
+        {
+          "comment": "a hash with error information if transaction creation failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:error] != nil"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param from_address is not a valid blockchain address",
+          "kind": "THROWS",
+          "condition": "!from_address.match?(/^0x[a-fA-F0-9]{40}$/)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param to_address is not a valid blockchain address",
+          "kind": "THROWS",
+          "condition": "!to_address.match?(/^0x[a-fA-F0-9]{40}$/)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param amount is out of the allowed range",
+          "kind": "THROWS",
+          "condition": "amount <= 0 || amount >= 1000000000"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param currency is not one of the supported cryptocurrencies",
+          "kind": "THROWS",
+          "condition": "!['ETH', 'BTC', 'USDT', 'DAI'].include?(currency)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param gas_price is not within the allowed range",
+          "kind": "THROWS",
+          "condition": "!gas_price.is_a?(Integer) || gas_price <= 0 || gas_price > 1000000000000"
+        },
+        {
+          "exceptionType": "RuntimeError",
+          "comment": "insufficient balance in the from_address for the transaction",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param from_address [String] must be a valid blockchain address format\n@param to_address [String] must be a valid blockchain address format\n@param amount [Float] must be greater than zero and less than 1000000000\n@param currency [String] must be one of: ETH, BTC, USDT, DAI\n@param gas_price [Integer] must be a positive integer between 1 and 1000000000000\n@param data [String] must be a hex-encoded string or empty\n@return [Hash] a hash containing the transaction hash and confirmation details if successful\n@return [Hash] a hash with error information if transaction creation failed\n@raise [ArgumentError] the param from_address is not a valid blockchain address\n@raise [ArgumentError] the param to_address is not a valid blockchain address\n@raise [ArgumentError] the param amount is out of the allowed range\n@raise [ArgumentError] the param currency is not one of the supported cryptocurrencies\n@raise [ArgumentError] the param gas_price is not within the allowed range\n@raise [RuntimeError] insufficient balance in the from_address for the transaction"
+    },
+    {
+      "signature": "MLModel#predict(features, model_version, confidence_threshold, return_probabilities, context)",
+      "class": "MLModel",
+      "method": "predict",
+      "parameters": [
+        {
+          "name": "features",
+          "type": "Hash"
+        },
+        {
+          "name": "model_version",
+          "type": "String"
+        },
+        {
+          "name": "confidence_threshold",
+          "type": "Float"
+        },
+        {
+          "name": "return_probabilities",
+          "type": "Boolean"
+        },
+        {
+          "name": "context",
+          "type": "Hash"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "features",
+          "comment": "must be a hash with feature names as keys and numeric values",
+          "kind": "PARAM",
+          "condition": "features.is_a?(Hash) && features.length > 0 && features.values.all? { |v| v.is_a?(Numeric) }"
+        },
+        {
+          "parameter": "model_version",
+          "comment": "must be a valid semantic version string",
+          "kind": "PARAM",
+          "condition": "model_version.match?(/^[0-9]+\\.[0-9]+\\.[0-9]+$/)"
+        },
+        {
+          "parameter": "confidence_threshold",
+          "comment": "must be a float between 0.0 and 1.0",
+          "kind": "PARAM",
+          "condition": "confidence_threshold.is_a?(Float) && confidence_threshold >= 0.0 && confidence_threshold <= 1.0"
+        },
+        {
+          "parameter": "return_probabilities",
+          "comment": "must be a boolean indicating whether to return probability scores",
+          "kind": "PARAM",
+          "condition": "return_probabilities.is_a?(TrueClass) || return_probabilities.is_a?(FalseClass)"
+        },
+        {
+          "parameter": "context",
+          "comment": "must be a hash with prediction context information",
+          "kind": "PARAM",
+          "condition": "context.is_a?(Hash)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the prediction result with confidence score if above threshold",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:confidence] >= confidence_threshold"
+        },
+        {
+          "comment": "a hash with low confidence warning if prediction confidence is below threshold",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:confidence] < confidence_threshold && return_value[:warning] != nil"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param features is empty or contains non-numeric values",
+          "kind": "THROWS",
+          "condition": "!features.is_a?(Hash) || features.length == 0 || !features.values.all? { |v| v.is_a?(Numeric) }"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param model_version is not a valid semantic version",
+          "kind": "THROWS",
+          "condition": "!model_version.match?(/^[0-9]+\\.[0-9]+\\.[0-9]+$/)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param confidence_threshold is not within the range 0.0 to 1.0",
+          "kind": "THROWS",
+          "condition": "!confidence_threshold.is_a?(Float) || confidence_threshold < 0.0 || confidence_threshold > 1.0"
+        },
+        {
+          "exceptionType": "RuntimeError",
+          "comment": "the specified model version does not exist or cannot be loaded",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param features [Hash] must be a hash with feature names as keys and numeric values\n@param model_version [String] must be a valid semantic version string\n@param confidence_threshold [Float] must be a float between 0.0 and 1.0\n@param return_probabilities [Boolean] must be a boolean indicating whether to return probability scores\n@param context [Hash] must be a hash with prediction context information\n@return [Hash] a hash containing the prediction result with confidence score if above threshold\n@return [Hash] a hash with low confidence warning if prediction confidence is below threshold\n@raise [ArgumentError] the param features is empty or contains non-numeric values\n@raise [ArgumentError] the param model_version is not a valid semantic version\n@raise [ArgumentError] the param confidence_threshold is not within the range 0.0 to 1.0\n@raise [RuntimeError] the specified model version does not exist or cannot be loaded"
+    },
+    {
+      "signature": "GraphQLResolver#resolve_query(query, variables, operation_name, context, fragments)",
+      "class": "GraphQLResolver",
+      "method": "resolve_query",
+      "parameters": [
+        {
+          "name": "query",
+          "type": "String"
+        },
+        {
+          "name": "variables",
+          "type": "Hash"
+        },
+        {
+          "name": "operation_name",
+          "type": "String"
+        },
+        {
+          "name": "context",
+          "type": "Hash"
+        },
+        {
+          "name": "fragments",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "query",
+          "comment": "must be a valid GraphQL query string",
+          "kind": "PARAM",
+          "condition": "query != nil && query.length > 0 && query.include?('{')"
+        },
+        {
+          "parameter": "variables",
+          "comment": "must be a hash with GraphQL variable values",
+          "kind": "PARAM",
+          "condition": "variables.is_a?(Hash)"
+        },
+        {
+          "parameter": "operation_name",
+          "comment": "must be a valid operation name or nil",
+          "kind": "PARAM",
+          "condition": "operation_name.nil? || (operation_name.is_a?(String) && operation_name.match?(/^[a-zA-Z][a-zA-Z0-9_]*$/))"
+        },
+        {
+          "parameter": "context",
+          "comment": "must be a hash with resolver context information",
+          "kind": "PARAM",
+          "condition": "context.is_a?(Hash)"
+        },
+        {
+          "parameter": "fragments",
+          "comment": "must be an array of GraphQL fragment definitions",
+          "kind": "PARAM",
+          "condition": "fragments.is_a?(Array)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the resolved query results if successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:data] != nil"
+        },
+        {
+          "comment": "a hash with GraphQL errors if query resolution failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:errors] != nil"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param query is empty or not a valid GraphQL query",
+          "kind": "THROWS",
+          "condition": "query.nil? || query.length == 0 || !query.include?('{')"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param variables is not a hash",
+          "kind": "THROWS",
+          "condition": "!variables.is_a?(Hash)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param operation_name contains invalid characters",
+          "kind": "THROWS",
+          "condition": "!operation_name.nil? && (!operation_name.is_a?(String) || !operation_name.match?(/^[a-zA-Z][a-zA-Z0-9_]*$/))"
+        },
+        {
+          "exceptionType": "SyntaxError",
+          "comment": "the GraphQL query contains syntax errors",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param query [String] must be a valid GraphQL query string\n@param variables [Hash] must be a hash with GraphQL variable values\n@param operation_name [String] must be a valid operation name or nil\n@param context [Hash] must be a hash with resolver context information\n@param fragments [Array] must be an array of GraphQL fragment definitions\n@return [Hash] a hash containing the resolved query results if successful\n@return [Hash] a hash with GraphQL errors if query resolution failed\n@raise [ArgumentError] the param query is empty or not a valid GraphQL query\n@raise [ArgumentError] the param variables is not a hash\n@raise [ArgumentError] the param operation_name contains invalid characters\n@raise [SyntaxError] the GraphQL query contains syntax errors"
+    },
+    {
+      "signature": "DistributedLock#acquire_lock(resource_id, timeout, owner_id, metadata, auto_renew)",
+      "class": "DistributedLock",
+      "method": "acquire_lock",
+      "parameters": [
+        {
+          "name": "resource_id",
+          "type": "String"
+        },
+        {
+          "name": "timeout",
+          "type": "Integer"
+        },
+        {
+          "name": "owner_id",
+          "type": "String"
+        },
+        {
+          "name": "metadata",
+          "type": "Hash"
+        },
+        {
+          "name": "auto_renew",
+          "type": "Boolean"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "resource_id",
+          "comment": "must be a unique resource identifier",
+          "kind": "PARAM",
+          "condition": "resource_id != nil && resource_id != ''"
+        },
+        {
+          "parameter": "timeout",
+          "comment": "must be a positive integer between 1 and 3600 seconds",
+          "kind": "PARAM",
+          "condition": "timeout.is_a?(Integer) && timeout > 0 && timeout <= 3600"
+        },
+        {
+          "parameter": "owner_id",
+          "comment": "must be a unique owner identifier",
+          "kind": "PARAM",
+          "condition": "owner_id != nil && owner_id != ''"
+        },
+        {
+          "parameter": "metadata",
+          "comment": "must be a hash with lock metadata information",
+          "kind": "PARAM",
+          "condition": "metadata.is_a?(Hash)"
+        },
+        {
+          "parameter": "auto_renew",
+          "comment": "must be a boolean indicating whether to automatically renew the lock",
+          "kind": "PARAM",
+          "condition": "auto_renew.is_a?(TrueClass) || auto_renew.is_a?(FalseClass)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the lock token and expiration time if lock was acquired",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:acquired] == true"
+        },
+        {
+          "comment": "a hash indicating the lock could not be acquired because it is held by another owner",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:acquired] == false && return_value[:locked_by] != nil"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param resource_id is empty or nil",
+          "kind": "THROWS",
+          "condition": "resource_id.nil? || resource_id == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param timeout is not within the allowed range",
+          "kind": "THROWS",
+          "condition": "!timeout.is_a?(Integer) || timeout <= 0 || timeout > 3600"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param owner_id is empty or nil",
+          "kind": "THROWS",
+          "condition": "owner_id.nil? || owner_id == ''"
+        },
+        {
+          "exceptionType": "RuntimeError",
+          "comment": "the distributed lock service is unavailable",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param resource_id [String] must be a unique resource identifier\n@param timeout [Integer] must be a positive integer between 1 and 3600 seconds\n@param owner_id [String] must be a unique owner identifier\n@param metadata [Hash] must be a hash with lock metadata information\n@param auto_renew [Boolean] must be a boolean indicating whether to automatically renew the lock\n@return [Hash] a hash containing the lock token and expiration time if lock was acquired\n@return [Hash] a hash indicating the lock could not be acquired because it is held by another owner\n@raise [ArgumentError] the param resource_id is empty or nil\n@raise [ArgumentError] the param timeout is not within the allowed range\n@raise [ArgumentError] the param owner_id is empty or nil\n@raise [RuntimeError] the distributed lock service is unavailable"
+    },
+    {
+      "signature": "StreamProcessor#process_stream(stream_id, processor_config, window_size, aggregation, output_sink)",
+      "class": "StreamProcessor",
+      "method": "process_stream",
+      "parameters": [
+        {
+          "name": "stream_id",
+          "type": "String"
+        },
+        {
+          "name": "processor_config",
+          "type": "Hash"
+        },
+        {
+          "name": "window_size",
+          "type": "Integer"
+        },
+        {
+          "name": "aggregation",
+          "type": "String"
+        },
+        {
+          "name": "output_sink",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "stream_id",
+          "comment": "must be a valid stream identifier",
+          "kind": "PARAM",
+          "condition": "stream_id != nil && stream_id != ''"
+        },
+        {
+          "parameter": "processor_config",
+          "comment": "must be a hash with processor configuration settings",
+          "kind": "PARAM",
+          "condition": "processor_config.is_a?(Hash) && processor_config.has_key?(:type)"
+        },
+        {
+          "parameter": "window_size",
+          "comment": "must be a positive integer between 1 and 10000",
+          "kind": "PARAM",
+          "condition": "window_size.is_a?(Integer) && window_size > 0 && window_size <= 10000"
+        },
+        {
+          "parameter": "aggregation",
+          "comment": "must be one of: sum, average, count, min, max, latest",
+          "kind": "PARAM",
+          "condition": "['sum', 'average', 'count', 'min', 'max', 'latest'].include?(aggregation)"
+        },
+        {
+          "parameter": "output_sink",
+          "comment": "must be a valid output destination identifier",
+          "kind": "PARAM",
+          "condition": "output_sink != nil && output_sink != ''"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the stream processing job ID and status if started successfully",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:job_id] != nil"
+        },
+        {
+          "comment": "a hash with error information if stream processing failed to start",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:error] != nil"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param stream_id is empty or invalid",
+          "kind": "THROWS",
+          "condition": "stream_id.nil? || stream_id == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param processor_config is missing required type key",
+          "kind": "THROWS",
+          "condition": "!processor_config.is_a?(Hash) || !processor_config.has_key?(:type)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param window_size is not within the allowed range",
+          "kind": "THROWS",
+          "condition": "!window_size.is_a?(Integer) || window_size <= 0 || window_size > 10000"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param aggregation is not one of the supported aggregation functions",
+          "kind": "THROWS",
+          "condition": "!['sum', 'average', 'count', 'min', 'max', 'latest'].include?(aggregation)"
+        },
+        {
+          "exceptionType": "RuntimeError",
+          "comment": "the stream with the given id does not exist or is not accessible",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param stream_id [String] must be a valid stream identifier\n@param processor_config [Hash] must be a hash with processor configuration settings\n@param window_size [Integer] must be a positive integer between 1 and 10000\n@param aggregation [String] must be one of: sum, average, count, min, max, latest\n@param output_sink [String] must be a valid output destination identifier\n@return [Hash] a hash containing the stream processing job ID and status if started successfully\n@return [Hash] a hash with error information if stream processing failed to start\n@raise [ArgumentError] the param stream_id is empty or invalid\n@raise [ArgumentError] the param processor_config is missing required type key\n@raise [ArgumentError] the param window_size is not within the allowed range\n@raise [ArgumentError] the param aggregation is not one of the supported aggregation functions\n@raise [RuntimeError] the stream with the given id does not exist or is not accessible"
+    },
+    {
+      "signature": "ConfigurationManager#update_config(config_path, updates, merge_strategy, validate, backup)",
+      "class": "ConfigurationManager",
+      "method": "update_config",
+      "parameters": [
+        {
+          "name": "config_path",
+          "type": "String"
+        },
+        {
+          "name": "updates",
+          "type": "Hash"
+        },
+        {
+          "name": "merge_strategy",
+          "type": "String"
+        },
+        {
+          "name": "validate",
+          "type": "Boolean"
+        },
+        {
+          "name": "backup",
+          "type": "Boolean"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "config_path",
+          "comment": "must be a valid configuration file path",
+          "kind": "PARAM",
+          "condition": "config_path != nil && config_path != ''"
+        },
+        {
+          "parameter": "updates",
+          "comment": "must be a hash with configuration key-value pairs to update",
+          "kind": "PARAM",
+          "condition": "updates.is_a?(Hash) && updates.length > 0"
+        },
+        {
+          "parameter": "merge_strategy",
+          "comment": "must be one of: replace, merge, deep_merge",
+          "kind": "PARAM",
+          "condition": "['replace', 'merge', 'deep_merge'].include?(merge_strategy)"
+        },
+        {
+          "parameter": "validate",
+          "comment": "must be a boolean indicating whether to validate the configuration",
+          "kind": "PARAM",
+          "condition": "validate.is_a?(TrueClass) || validate.is_a?(FalseClass)"
+        },
+        {
+          "parameter": "backup",
+          "comment": "must be a boolean indicating whether to create a backup before updating",
+          "kind": "PARAM",
+          "condition": "backup.is_a?(TrueClass) || backup.is_a?(FalseClass)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the updated configuration if the update was successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:success] == true"
+        },
+        {
+          "comment": "a hash with validation errors if configuration validation failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:success] == false && return_value[:validation_errors] != nil"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param config_path is empty or invalid",
+          "kind": "THROWS",
+          "condition": "config_path.nil? || config_path == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param updates is empty or not a hash",
+          "kind": "THROWS",
+          "condition": "!updates.is_a?(Hash) || updates.length == 0"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param merge_strategy is not one of the supported strategies",
+          "kind": "THROWS",
+          "condition": "!['replace', 'merge', 'deep_merge'].include?(merge_strategy)"
+        },
+        {
+          "exceptionType": "IOError",
+          "comment": "the configuration file cannot be read or written",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param config_path [String] must be a valid configuration file path\n@param updates [Hash] must be a hash with configuration key-value pairs to update\n@param merge_strategy [String] must be one of: replace, merge, deep_merge\n@param validate [Boolean] must be a boolean indicating whether to validate the configuration\n@param backup [Boolean] must be a boolean indicating whether to create a backup before updating\n@return [Hash] a hash containing the updated configuration if the update was successful\n@return [Hash] a hash with validation errors if configuration validation failed\n@raise [ArgumentError] the param config_path is empty or invalid\n@raise [ArgumentError] the param updates is empty or not a hash\n@raise [ArgumentError] the param merge_strategy is not one of the supported strategies\n@raise [IOError] the configuration file cannot be read or written"
+    },
+    {
+      "signature": "EncryptionService#encrypt_with_key_rotation(data, algorithm, key_id, rotation_policy, metadata)",
+      "class": "EncryptionService",
+      "method": "encrypt_with_key_rotation",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "String"
+        },
+        {
+          "name": "algorithm",
+          "type": "String"
+        },
+        {
+          "name": "key_id",
+          "type": "String"
+        },
+        {
+          "name": "rotation_policy",
+          "type": "String"
+        },
+        {
+          "name": "metadata",
+          "type": "Hash"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "data",
+          "comment": "must not be empty and must be a string to encrypt",
+          "kind": "PARAM",
+          "condition": "data != nil && data.is_a?(String) && data.length > 0"
+        },
+        {
+          "parameter": "algorithm",
+          "comment": "must be one of: AES-256, RSA-2048, ChaCha20-Poly1305",
+          "kind": "PARAM",
+          "condition": "['AES-256', 'RSA-2048', 'ChaCha20-Poly1305'].include?(algorithm)"
+        },
+        {
+          "parameter": "key_id",
+          "comment": "must be a valid encryption key identifier",
+          "kind": "PARAM",
+          "condition": "key_id != nil && key_id != ''"
+        },
+        {
+          "parameter": "rotation_policy",
+          "comment": "must be one of: never, daily, weekly, monthly",
+          "kind": "PARAM",
+          "condition": "['never', 'daily', 'weekly', 'monthly'].include?(rotation_policy)"
+        },
+        {
+          "parameter": "metadata",
+          "comment": "must be a hash with encryption metadata",
+          "kind": "PARAM",
+          "condition": "metadata.is_a?(Hash)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the encrypted data and key information if encryption was successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:encrypted_data] != nil"
+        },
+        {
+          "comment": "a hash with error information if encryption failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:error] != nil"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param data is empty or not a string",
+          "kind": "THROWS",
+          "condition": "data.nil? || !data.is_a?(String) || data.length == 0"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param algorithm is not one of the supported encryption algorithms",
+          "kind": "THROWS",
+          "condition": "!['AES-256', 'RSA-2048', 'ChaCha20-Poly1305'].include?(algorithm)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param key_id is empty or invalid",
+          "kind": "THROWS",
+          "condition": "key_id.nil? || key_id == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param rotation_policy is not one of the supported policies",
+          "kind": "THROWS",
+          "condition": "!['never', 'daily', 'weekly', 'monthly'].include?(rotation_policy)"
+        },
+        {
+          "exceptionType": "SecurityError",
+          "comment": "the encryption key is not available or has been revoked",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param data [String] must not be empty and must be a string to encrypt\n@param algorithm [String] must be one of: AES-256, RSA-2048, ChaCha20-Poly1305\n@param key_id [String] must be a valid encryption key identifier\n@param rotation_policy [String] must be one of: never, daily, weekly, monthly\n@param metadata [Hash] must be a hash with encryption metadata\n@return [Hash] a hash containing the encrypted data and key information if encryption was successful\n@return [Hash] a hash with error information if encryption failed\n@raise [ArgumentError] the param data is empty or not a string\n@raise [ArgumentError] the param algorithm is not one of the supported encryption algorithms\n@raise [ArgumentError] the param key_id is empty or invalid\n@raise [ArgumentError] the param rotation_policy is not one of the supported policies\n@raise [SecurityError] the encryption key is not available or has been revoked"
+    },
+    {
+      "signature": "AuditLogger#log_event(event_type, actor, resource, action, details, severity)",
+      "class": "AuditLogger",
+      "method": "log_event",
+      "parameters": [
+        {
+          "name": "event_type",
+          "type": "String"
+        },
+        {
+          "name": "actor",
+          "type": "String"
+        },
+        {
+          "name": "resource",
+          "type": "String"
+        },
+        {
+          "name": "action",
+          "type": "String"
+        },
+        {
+          "name": "details",
+          "type": "Hash"
+        },
+        {
+          "name": "severity",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "event_type",
+          "comment": "must be one of: access, modification, deletion, creation, authentication",
+          "kind": "PARAM",
+          "condition": "['access', 'modification', 'deletion', 'creation', 'authentication'].include?(event_type)"
+        },
+        {
+          "parameter": "actor",
+          "comment": "must be a valid actor identifier",
+          "kind": "PARAM",
+          "condition": "actor != nil && actor != ''"
+        },
+        {
+          "parameter": "resource",
+          "comment": "must be a valid resource identifier",
+          "kind": "PARAM",
+          "condition": "resource != nil && resource != ''"
+        },
+        {
+          "parameter": "action",
+          "comment": "must be a descriptive action string",
+          "kind": "PARAM",
+          "condition": "action != nil && action.length > 0 && action.length <= 200"
+        },
+        {
+          "parameter": "details",
+          "comment": "must be a hash with event details",
+          "kind": "PARAM",
+          "condition": "details.is_a?(Hash)"
+        },
+        {
+          "parameter": "severity",
+          "comment": "must be one of: info, warning, error, critical",
+          "kind": "PARAM",
+          "condition": "['info', 'warning', 'error', 'critical'].include?(severity)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the audit log entry ID and timestamp if logging was successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:log_id] != nil"
+        },
+        {
+          "comment": "a hash with error information if audit logging failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:error] != nil"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param event_type is not one of the supported event types",
+          "kind": "THROWS",
+          "condition": "!['access', 'modification', 'deletion', 'creation', 'authentication'].include?(event_type)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param actor is empty or nil",
+          "kind": "THROWS",
+          "condition": "actor.nil? || actor == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param resource is empty or nil",
+          "kind": "THROWS",
+          "condition": "resource.nil? || resource == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param action is empty or exceeds the maximum length of 200 characters",
+          "kind": "THROWS",
+          "condition": "action.nil? || action.length == 0 || action.length > 200"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param severity is not one of the supported severity levels",
+          "kind": "THROWS",
+          "condition": "!['info', 'warning', 'error', 'critical'].include?(severity)"
+        }
+      ],
+      "doc": "@param event_type [String] must be one of: access, modification, deletion, creation, authentication\n@param actor [String] must be a valid actor identifier\n@param resource [String] must be a valid resource identifier\n@param action [String] must be a descriptive action string\n@param details [Hash] must be a hash with event details\n@param severity [String] must be one of: info, warning, error, critical\n@return [Hash] a hash containing the audit log entry ID and timestamp if logging was successful\n@return [Hash] a hash with error information if audit logging failed\n@raise [ArgumentError] the param event_type is not one of the supported event types\n@raise [ArgumentError] the param actor is empty or nil\n@raise [ArgumentError] the param resource is empty or nil\n@raise [ArgumentError] the param action is empty or exceeds the maximum length of 200 characters\n@raise [ArgumentError] the param severity is not one of the supported severity levels"
+    },
+    {
+      "signature": "ResourceAllocator#allocate_resources(resource_type, quantity, priority, constraints, allocation_strategy)",
+      "class": "ResourceAllocator",
+      "method": "allocate_resources",
+      "parameters": [
+        {
+          "name": "resource_type",
+          "type": "String"
+        },
+        {
+          "name": "quantity",
+          "type": "Integer"
+        },
+        {
+          "name": "priority",
+          "type": "Integer"
+        },
+        {
+          "name": "constraints",
+          "type": "Hash"
+        },
+        {
+          "name": "allocation_strategy",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "resource_type",
+          "comment": "must be one of: cpu, memory, storage, network, gpu",
+          "kind": "PARAM",
+          "condition": "['cpu', 'memory', 'storage', 'network', 'gpu'].include?(resource_type)"
+        },
+        {
+          "parameter": "quantity",
+          "comment": "must be a positive integer between 1 and 1000000",
+          "kind": "PARAM",
+          "condition": "quantity.is_a?(Integer) && quantity > 0 && quantity <= 1000000"
+        },
+        {
+          "parameter": "priority",
+          "comment": "must be an integer between 0 and 10 representing allocation priority",
+          "kind": "PARAM",
+          "condition": "priority.is_a?(Integer) && priority >= 0 && priority <= 10"
+        },
+        {
+          "parameter": "constraints",
+          "comment": "must be a hash with resource allocation constraints",
+          "kind": "PARAM",
+          "condition": "constraints.is_a?(Hash)"
+        },
+        {
+          "parameter": "allocation_strategy",
+          "comment": "must be one of: first_fit, best_fit, worst_fit, round_robin",
+          "kind": "PARAM",
+          "condition": "['first_fit', 'best_fit', 'worst_fit', 'round_robin'].include?(allocation_strategy)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the allocated resource IDs and details if allocation was successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:allocated] == true"
+        },
+        {
+          "comment": "a hash indicating insufficient resources available for the requested allocation",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:allocated] == false && return_value[:reason] == 'insufficient_resources'"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param resource_type is not one of the supported resource types",
+          "kind": "THROWS",
+          "condition": "!['cpu', 'memory', 'storage', 'network', 'gpu'].include?(resource_type)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param quantity is not within the allowed range",
+          "kind": "THROWS",
+          "condition": "!quantity.is_a?(Integer) || quantity <= 0 || quantity > 1000000"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param priority is not within the range 0 to 10",
+          "kind": "THROWS",
+          "condition": "!priority.is_a?(Integer) || priority < 0 || priority > 10"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param allocation_strategy is not one of the supported strategies",
+          "kind": "THROWS",
+          "condition": "!['first_fit', 'best_fit', 'worst_fit', 'round_robin'].include?(allocation_strategy)"
+        }
+      ],
+      "doc": "@param resource_type [String] must be one of: cpu, memory, storage, network, gpu\n@param quantity [Integer] must be a positive integer between 1 and 1000000\n@param priority [Integer] must be an integer between 0 and 10 representing allocation priority\n@param constraints [Hash] must be a hash with resource allocation constraints\n@param allocation_strategy [String] must be one of: first_fit, best_fit, worst_fit, round_robin\n@return [Hash] a hash containing the allocated resource IDs and details if allocation was successful\n@return [Hash] a hash indicating insufficient resources available for the requested allocation\n@raise [ArgumentError] the param resource_type is not one of the supported resource types\n@raise [ArgumentError] the param quantity is not within the allowed range\n@raise [ArgumentError] the param priority is not within the range 0 to 10\n@raise [ArgumentError] the param allocation_strategy is not one of the supported strategies"
+    },
+    {
+      "signature": "ComplianceChecker#validate_compliance(entity, regulations, scope, strict_mode, report_format)",
+      "class": "ComplianceChecker",
+      "method": "validate_compliance",
+      "parameters": [
+        {
+          "name": "entity",
+          "type": "Object"
+        },
+        {
+          "name": "regulations",
+          "type": "Array"
+        },
+        {
+          "name": "scope",
+          "type": "String"
+        },
+        {
+          "name": "strict_mode",
+          "type": "Boolean"
+        },
+        {
+          "name": "report_format",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "entity",
+          "comment": "must not be nil and must be a valid entity object",
+          "kind": "PARAM",
+          "condition": "entity != nil"
+        },
+        {
+          "parameter": "regulations",
+          "comment": "must be a non-empty array of regulation identifiers",
+          "kind": "PARAM",
+          "condition": "regulations.is_a?(Array) && regulations.length > 0"
+        },
+        {
+          "parameter": "scope",
+          "comment": "must be one of: full, partial, specific",
+          "kind": "PARAM",
+          "condition": "['full', 'partial', 'specific'].include?(scope)"
+        },
+        {
+          "parameter": "strict_mode",
+          "comment": "must be a boolean indicating whether to use strict compliance checking",
+          "kind": "PARAM",
+          "condition": "strict_mode.is_a?(TrueClass) || strict_mode.is_a?(FalseClass)"
+        },
+        {
+          "parameter": "report_format",
+          "comment": "must be one of: json, xml, pdf, html",
+          "kind": "PARAM",
+          "condition": "['json', 'xml', 'pdf', 'html'].include?(report_format)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing compliance validation results with all regulations passed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:compliant] == true"
+        },
+        {
+          "comment": "a hash with compliance violations if any regulations were not met",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:compliant] == false && return_value[:violations] != nil"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param entity is nil or not a valid entity object",
+          "kind": "THROWS",
+          "condition": "entity.nil?"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param regulations is empty or not an array",
+          "kind": "THROWS",
+          "condition": "!regulations.is_a?(Array) || regulations.length == 0"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param scope is not one of the supported scopes",
+          "kind": "THROWS",
+          "condition": "!['full', 'partial', 'specific'].include?(scope)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param report_format is not one of the supported formats",
+          "kind": "THROWS",
+          "condition": "!['json', 'xml', 'pdf', 'html'].include?(report_format)"
+        }
+      ],
+      "doc": "@param entity [Object] must not be nil and must be a valid entity object\n@param regulations [Array] must be a non-empty array of regulation identifiers\n@param scope [String] must be one of: full, partial, specific\n@param strict_mode [Boolean] must be a boolean indicating whether to use strict compliance checking\n@param report_format [String] must be one of: json, xml, pdf, html\n@return [Hash] a hash containing compliance validation results with all regulations passed\n@return [Hash] a hash with compliance violations if any regulations were not met\n@raise [ArgumentError] the param entity is nil or not a valid entity object\n@raise [ArgumentError] the param regulations is empty or not an array\n@raise [ArgumentError] the param scope is not one of the supported scopes\n@raise [ArgumentError] the param report_format is not one of the supported formats"
+    },
+    {
+      "signature": "BackupManager#create_backup(source_paths, destination, compression, encryption, retention_policy)",
+      "class": "BackupManager",
+      "method": "create_backup",
+      "parameters": [
+        {
+          "name": "source_paths",
+          "type": "Array"
+        },
+        {
+          "name": "destination",
+          "type": "String"
+        },
+        {
+          "name": "compression",
+          "type": "String"
+        },
+        {
+          "name": "encryption",
+          "type": "Boolean"
+        },
+        {
+          "name": "retention_policy",
+          "type": "Hash"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "source_paths",
+          "comment": "must be a non-empty array of valid file or directory paths",
+          "kind": "PARAM",
+          "condition": "source_paths.is_a?(Array) && source_paths.length > 0 && source_paths.all? { |p| File.exist?(p) || Dir.exist?(p) }"
+        },
+        {
+          "parameter": "destination",
+          "comment": "must be a valid destination path for the backup",
+          "kind": "PARAM",
+          "condition": "destination != nil && destination != ''"
+        },
+        {
+          "parameter": "compression",
+          "comment": "must be one of: none, gzip, bzip2, xz",
+          "kind": "PARAM",
+          "condition": "['none', 'gzip', 'bzip2', 'xz'].include?(compression)"
+        },
+        {
+          "parameter": "encryption",
+          "comment": "must be a boolean indicating whether to encrypt the backup",
+          "kind": "PARAM",
+          "condition": "encryption.is_a?(TrueClass) || encryption.is_a?(FalseClass)"
+        },
+        {
+          "parameter": "retention_policy",
+          "comment": "must be a hash with backup retention policy settings",
+          "kind": "PARAM",
+          "condition": "retention_policy.is_a?(Hash)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the backup location and metadata if backup was successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:backup_id] != nil"
+        },
+        {
+          "comment": "a hash with error information if backup creation failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:error] != nil"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param source_paths is empty or contains invalid paths",
+          "kind": "THROWS",
+          "condition": "!source_paths.is_a?(Array) || source_paths.length == 0 || !source_paths.all? { |p| File.exist?(p) || Dir.exist?(p) }"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param destination is empty or invalid",
+          "kind": "THROWS",
+          "condition": "destination.nil? || destination == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param compression is not one of the supported compression methods",
+          "kind": "THROWS",
+          "condition": "!['none', 'gzip', 'bzip2', 'xz'].include?(compression)"
+        },
+        {
+          "exceptionType": "IOError",
+          "comment": "insufficient disk space available for the backup",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param source_paths [Array] must be a non-empty array of valid file or directory paths\n@param destination [String] must be a valid destination path for the backup\n@param compression [String] must be one of: none, gzip, bzip2, xz\n@param encryption [Boolean] must be a boolean indicating whether to encrypt the backup\n@param retention_policy [Hash] must be a hash with backup retention policy settings\n@return [Hash] a hash containing the backup location and metadata if backup was successful\n@return [Hash] a hash with error information if backup creation failed\n@raise [ArgumentError] the param source_paths is empty or contains invalid paths\n@raise [ArgumentError] the param destination is empty or invalid\n@raise [ArgumentError] the param compression is not one of the supported compression methods\n@raise [IOError] insufficient disk space available for the backup"
+    },
+    {
+      "signature": "LoadBalancer#route_request(request, backend_pool, algorithm, health_check, sticky_session)",
+      "class": "LoadBalancer",
+      "method": "route_request",
+      "parameters": [
+        {
+          "name": "request",
+          "type": "Hash"
+        },
+        {
+          "name": "backend_pool",
+          "type": "Array"
+        },
+        {
+          "name": "algorithm",
+          "type": "String"
+        },
+        {
+          "name": "health_check",
+          "type": "Boolean"
+        },
+        {
+          "name": "sticky_session",
+          "type": "Boolean"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "request",
+          "comment": "must be a hash with request information including method and path",
+          "kind": "PARAM",
+          "condition": "request.is_a?(Hash) && request.has_key?(:method) && request.has_key?(:path)"
+        },
+        {
+          "parameter": "backend_pool",
+          "comment": "must be a non-empty array of backend server addresses",
+          "kind": "PARAM",
+          "condition": "backend_pool.is_a?(Array) && backend_pool.length > 0"
+        },
+        {
+          "parameter": "algorithm",
+          "comment": "must be one of: round_robin, least_connections, ip_hash, weighted",
+          "kind": "PARAM",
+          "condition": "['round_robin', 'least_connections', 'ip_hash', 'weighted'].include?(algorithm)"
+        },
+        {
+          "parameter": "health_check",
+          "comment": "must be a boolean indicating whether to perform health checks",
+          "kind": "PARAM",
+          "condition": "health_check.is_a?(TrueClass) || health_check.is_a?(FalseClass)"
+        },
+        {
+          "parameter": "sticky_session",
+          "comment": "must be a boolean indicating whether to use sticky sessions",
+          "kind": "PARAM",
+          "condition": "sticky_session.is_a?(TrueClass) || sticky_session.is_a?(FalseClass)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the selected backend server and routing information if routing was successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:backend] != nil"
+        },
+        {
+          "comment": "a hash indicating no healthy backends available if all servers are down",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:error] == 'no_healthy_backends'"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param request is missing required method or path keys",
+          "kind": "THROWS",
+          "condition": "!request.is_a?(Hash) || !request.has_key?(:method) || !request.has_key?(:path)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param backend_pool is empty or not an array",
+          "kind": "THROWS",
+          "condition": "!backend_pool.is_a?(Array) || backend_pool.length == 0"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param algorithm is not one of the supported load balancing algorithms",
+          "kind": "THROWS",
+          "condition": "!['round_robin', 'least_connections', 'ip_hash', 'weighted'].include?(algorithm)"
+        },
+        {
+          "exceptionType": "RuntimeError",
+          "comment": "all backend servers in the pool are unhealthy or unavailable",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param request [Hash] must be a hash with request information including method and path\n@param backend_pool [Array] must be a non-empty array of backend server addresses\n@param algorithm [String] must be one of: round_robin, least_connections, ip_hash, weighted\n@param health_check [Boolean] must be a boolean indicating whether to perform health checks\n@param sticky_session [Boolean] must be a boolean indicating whether to use sticky sessions\n@return [Hash] a hash containing the selected backend server and routing information if routing was successful\n@return [Hash] a hash indicating no healthy backends available if all servers are down\n@raise [ArgumentError] the param request is missing required method or path keys\n@raise [ArgumentError] the param backend_pool is empty or not an array\n@raise [ArgumentError] the param algorithm is not one of the supported load balancing algorithms\n@raise [RuntimeError] all backend servers in the pool are unhealthy or unavailable"
+    }
+  ]
+}

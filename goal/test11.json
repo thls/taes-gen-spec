@@ -1,0 +1,442 @@
+{
+  "dataset_part": [
+    {
+      "signature": "AccessControl#allow?(user, resource)",
+      "class": "AccessControl",
+      "method": "allow?",
+      "parameters": [
+        {
+          "name": "user",
+          "type": "String"
+        },
+        {
+          "name": "resource",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param user [String]\n@param resource [String]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "AccessControl#grant(user, resource)",
+      "class": "AccessControl",
+      "method": "grant",
+      "parameters": [
+        {
+          "name": "user",
+          "type": "String"
+        },
+        {
+          "name": "resource",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param user [String]\n@param resource [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "BackupService#start(path)",
+      "class": "BackupService",
+      "method": "start",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "path",
+          "comment": "must not be empty",
+          "kind": "PARAM",
+          "condition": "path.length > 0"
+        }
+      ],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param path [String] must not be empty\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "BackupService#status()",
+      "class": "BackupService",
+      "method": "status",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@return [String] a string representing the status result",
+      "returnTags": [
+        {
+          "comment": "a string representing the status result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Billing#charge(amount, currency)",
+      "class": "Billing",
+      "method": "charge",
+      "parameters": [
+        {
+          "name": "amount",
+          "type": "Float"
+        },
+        {
+          "name": "currency",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "amount",
+          "comment": "must be > 0",
+          "kind": "PARAM",
+          "condition": "amount > 0"
+        }
+      ],
+      "returnType": "Boolean",
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param amount is less than or equal to zero",
+          "kind": "THROWS",
+          "condition": "amount <= 0"
+        }
+      ],
+      "doc": "@param amount [Float] must be > 0\n@param currency [String]\n@return [Boolean] true if the payment operation was successful\n@return [Boolean] false if the payment operation failed\n@raise [ArgumentError] the param amount is less than or equal to zero",
+      "returnTags": [
+        {
+          "comment": "true if the payment operation was successful",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the payment operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Billing#refund(transaction_id)",
+      "class": "Billing",
+      "method": "refund",
+      "parameters": [
+        {
+          "name": "transaction_id",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param transaction_id [String]\n@return [Boolean] true if the payment operation was successful\n@return [Boolean] false if the payment operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the payment operation was successful",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the payment operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Cache#write(key, value)",
+      "class": "Cache",
+      "method": "write",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        },
+        {
+          "name": "value",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param key [String]\n@param value [Object]\n@return [Boolean] true if the data was successfully written\n@return [Boolean] false if writing failed",
+      "returnTags": [
+        {
+          "comment": "true if the data was successfully written",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if writing failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Cache#read(key)",
+      "class": "Cache",
+      "method": "read",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param key [String]\n@return [Object] the read result object",
+      "returnTags": [
+        {
+          "comment": "the read result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Calendar#next_day(date)",
+      "class": "Calendar",
+      "method": "next_day",
+      "parameters": [
+        {
+          "name": "date",
+          "type": "Date"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Date",
+      "throwsTags": [],
+      "doc": "@param date [Date]\n@return [Date] the next day",
+      "returnTags": [
+        {
+          "comment": "the next day",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Date)"
+        }
+      ]
+    },
+    {
+      "signature": "Calendar#leap_year?(year)",
+      "class": "Calendar",
+      "method": "leap_year?",
+      "parameters": [
+        {
+          "name": "year",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param year [Integer]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Cart#add_item(id, qty)",
+      "class": "Cart",
+      "method": "add_item",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "String"
+        },
+        {
+          "name": "qty",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "qty",
+          "comment": "must be >= 1",
+          "kind": "PARAM",
+          "condition": "qty >= 1"
+        }
+      ],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param id [String]\n@param qty [Integer] must be >= 1\n@return [Integer] the add item result as an integer",
+      "returnTags": [
+        {
+          "comment": "the add item result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "Cart#remove_item(id)",
+      "class": "Cart",
+      "method": "remove_item",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param id [String]\n@return [Integer] the remove item result as an integer",
+      "returnTags": [
+        {
+          "comment": "the remove item result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "Cipher#encrypt(text, key)",
+      "class": "Cipher",
+      "method": "encrypt",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        },
+        {
+          "name": "key",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@param key [String]\n@return [String] a string representing the encrypt result",
+      "returnTags": [
+        {
+          "comment": "a string representing the encrypt result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Cipher#decrypt(text, key)",
+      "class": "Cipher",
+      "method": "decrypt",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        },
+        {
+          "name": "key",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@param key [String]\n@return [String] a string representing the decrypt result",
+      "returnTags": [
+        {
+          "comment": "a string representing the decrypt result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Cleaner#sanitize(str)",
+      "class": "Cleaner",
+      "method": "sanitize",
+      "parameters": [
+        {
+          "name": "str",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param str [String]\n@return [String] a string representing the sanitize result",
+      "returnTags": [
+        {
+          "comment": "a string representing the sanitize result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Cleaner#strip_html(str)",
+      "class": "Cleaner",
+      "method": "strip_html",
+      "parameters": [
+        {
+          "name": "str",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param str [String]\n@return [String] a string representing the strip html result",
+      "returnTags": [
+        {
+          "comment": "a string representing the strip html result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    }
+  ]
+}

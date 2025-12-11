@@ -1,0 +1,479 @@
+{
+  "dataset_part": [
+    {
+      "signature": "OrderProcessor#process(order)",
+      "class": "OrderProcessor",
+      "method": "process",
+      "parameters": [
+        {
+          "name": "order",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "order",
+          "comment": "must not be nil",
+          "kind": "PARAM",
+          "condition": "order != nil"
+        }
+      ],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param order [Object] must not be nil\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "OrderProcessor#cancel(order_id)",
+      "class": "OrderProcessor",
+      "method": "cancel",
+      "parameters": [
+        {
+          "name": "order_id",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param order_id [Integer]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "OrderProcessor#status(order_id)",
+      "class": "OrderProcessor",
+      "method": "status",
+      "parameters": [
+        {
+          "name": "order_id",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param order_id [Integer]\n@return [String] a string representing the status result",
+      "returnTags": [
+        {
+          "comment": "a string representing the status result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "PasswordChecker#valid_length?(password)",
+      "class": "PasswordChecker",
+      "method": "valid_length?",
+      "parameters": [
+        {
+          "name": "password",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "password",
+          "comment": "minimum 8 chars",
+          "kind": "PARAM",
+          "condition": "password.length >= 8"
+        }
+      ],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param password [String] minimum 8 chars\n@return [Boolean] true if valid",
+      "returnTags": [
+        {
+          "comment": "true if valid",
+          "kind": "RETURN",
+          "condition": "return_value == (password.length >= 8)"
+        }
+      ]
+    },
+    {
+      "signature": "PasswordChecker#contains_number?(password)",
+      "class": "PasswordChecker",
+      "method": "contains_number?",
+      "parameters": [
+        {
+          "name": "password",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param password [String]\n@return [Boolean] true if contains digit",
+      "returnTags": [
+        {
+          "comment": "true if contains digit",
+          "kind": "RETURN",
+          "condition": "return_value == password.match?(/[0-9]/)"
+        }
+      ]
+    },
+    {
+      "signature": "PaymentGateway#charge(amount, card)",
+      "class": "PaymentGateway",
+      "method": "charge",
+      "parameters": [
+        {
+          "name": "amount",
+          "type": "Float"
+        },
+        {
+          "name": "card",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "amount",
+          "comment": "must be positive",
+          "kind": "PARAM",
+          "condition": "amount > 0"
+        }
+      ],
+      "returnType": "String",
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param amount is less than or equal to zero",
+          "kind": "THROWS",
+          "condition": "amount <= 0"
+        }
+      ],
+      "doc": "@param amount [Float] must be positive\n@param card [Object]\n@return [String] a string representing the charge result\n@raise [ArgumentError] the param amount is less than or equal to zero",
+      "returnTags": [
+        {
+          "comment": "a string representing the charge result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "PaymentGateway#refund(transaction_id)",
+      "class": "PaymentGateway",
+      "method": "refund",
+      "parameters": [
+        {
+          "name": "transaction_id",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param transaction_id [String]\n@return [Boolean] true if the payment operation was successful\n@return [Boolean] false if the payment operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the payment operation was successful",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the payment operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "PermissionChecker#allowed?(user, action)",
+      "class": "PermissionChecker",
+      "method": "allowed?",
+      "parameters": [
+        {
+          "name": "user",
+          "type": "Object"
+        },
+        {
+          "name": "action",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param user [Object]\n@param action [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "PermissionChecker#roles(user)",
+      "class": "PermissionChecker",
+      "method": "roles",
+      "parameters": [
+        {
+          "name": "user",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param user [Object]\n@return [Array] an array containing the roles results\n@return [Array] an empty array if no results are found",
+      "returnTags": [
+        {
+          "comment": "an array containing the roles results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty array if no results are found",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length == 0"
+        }
+      ]
+    },
+    {
+      "signature": "PhoneParser#digits(value)",
+      "class": "PhoneParser",
+      "method": "digits",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param value [String]\n@return [String] a string representing the digits result",
+      "returnTags": [
+        {
+          "comment": "a string representing the digits result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "PhoneParser#valid?(value)",
+      "class": "PhoneParser",
+      "method": "valid?",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param value [String]\n@return [Boolean] true if 10 or 11 digits",
+      "returnTags": [
+        {
+          "comment": "true if 10 or 11 digits",
+          "kind": "RETURN",
+          "condition": "return_value == (value.gsub(/[^0-9]/, '').length.between?(10, 11))"
+        }
+      ]
+    },
+    {
+      "signature": "PriceCalculator#total(base, tax)",
+      "class": "PriceCalculator",
+      "method": "total",
+      "parameters": [
+        {
+          "name": "base",
+          "type": "Float"
+        },
+        {
+          "name": "tax",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param base [Float]\n@param tax [Float]\n@return [Float] the total amount as a float\n@return [Float] 0.0 if the calculation results in zero or no items",
+      "returnTags": [
+        {
+          "comment": "the total amount as a float",
+          "kind": "RETURN",
+          "condition": "return_value > 0"
+        },
+        {
+          "comment": "0.0 if the calculation results in zero or no items",
+          "kind": "RETURN",
+          "condition": "return_value == 0.0"
+        }
+      ]
+    },
+    {
+      "signature": "PriceCalculator#discount(value, percent)",
+      "class": "PriceCalculator",
+      "method": "discount",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "Float"
+        },
+        {
+          "name": "percent",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "percent",
+          "comment": "0..100",
+          "kind": "PARAM",
+          "condition": "percent >= 0 && percent <= 100"
+        }
+      ],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param value [Float]\n@param percent [Float] 0..100\n@return [Float] the amount after applying the discount if valid",
+      "returnTags": [
+        {
+          "comment": "the amount after applying the discount if valid",
+          "kind": "RETURN",
+          "condition": "return_value >= 0"
+        }
+      ]
+    },
+    {
+      "signature": "ProductCatalog#add(product)",
+      "class": "ProductCatalog",
+      "method": "add",
+      "parameters": [
+        {
+          "name": "product",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "product",
+          "comment": "must not be nil",
+          "kind": "PARAM",
+          "condition": "product != nil"
+        }
+      ],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param product [Object] must not be nil\n@return [Integer] the add result as an integer",
+      "returnTags": [
+        {
+          "comment": "the add result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "ProductCatalog#find(id)",
+      "class": "ProductCatalog",
+      "method": "find",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param id [Integer]\n@return [Object, nil] the find object if found\n@return [nil] nil if not found",
+      "returnTags": [
+        {
+          "comment": "the find object if found",
+          "kind": "RETURN",
+          "condition": "return_value != nil"
+        },
+        {
+          "comment": "nil if not found",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "Profile#full_name(first, last)",
+      "class": "Profile",
+      "method": "full_name",
+      "parameters": [
+        {
+          "name": "first",
+          "type": "String"
+        },
+        {
+          "name": "last",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param first [String]\n@param last [String]\n@return [String] a string representing the full name result",
+      "returnTags": [
+        {
+          "comment": "a string representing the full name result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Profile#initials(first, last)",
+      "class": "Profile",
+      "method": "initials",
+      "parameters": [
+        {
+          "name": "first",
+          "type": "String"
+        },
+        {
+          "name": "last",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param first [String]\n@param last [String]\n@return [String] a string representing the initials result",
+      "returnTags": [
+        {
+          "comment": "a string representing the initials result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,523 @@
+{
+  "dataset_part": [
+    {
+      "signature": "KeyValueStore#set(key, value)",
+      "class": "KeyValueStore",
+      "method": "set",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        },
+        {
+          "name": "value",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "key",
+          "comment": "must not be empty",
+          "kind": "PARAM",
+          "condition": "key != \"\""
+        }
+      ],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param key [String] must not be empty\n@param value [Object]\n@return [Boolean] true if the data was successfully written\n@return [Boolean] false if writing failed",
+      "returnTags": [
+        {
+          "comment": "true if the data was successfully written",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if writing failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "KeyValueStore#get(key)",
+      "class": "KeyValueStore",
+      "method": "get",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param key [String]\n@return [Object, nil] the get object if found\n@return [nil] nil if not found",
+      "returnTags": [
+        {
+          "comment": "the get object if found",
+          "kind": "RETURN",
+          "condition": "return_value != nil"
+        },
+        {
+          "comment": "nil if not found",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "KeyValueStore#delete(key)",
+      "class": "KeyValueStore",
+      "method": "delete",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param key [String]\n@return [Boolean] true if the resource was successfully deleted\n@return [Boolean] false if deletion failed or the resource does not exist",
+      "returnTags": [
+        {
+          "comment": "true if the resource was successfully deleted",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if deletion failed or the resource does not exist",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "ListUtils#sum(numbers)",
+      "class": "ListUtils",
+      "method": "sum",
+      "parameters": [
+        {
+          "name": "numbers",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "numbers",
+          "comment": "must be an array",
+          "kind": "PARAM",
+          "condition": "numbers.is_a?(Array)"
+        }
+      ],
+      "returnType": "Numeric",
+      "throwsTags": [],
+      "doc": "@param numbers [Array] must be an array\n@return [Numeric] sum of all numbers",
+      "returnTags": [
+        {
+          "comment": "sum of all numbers",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Numeric)"
+        }
+      ]
+    },
+    {
+      "signature": "ListUtils#max(numbers)",
+      "class": "ListUtils",
+      "method": "max",
+      "parameters": [
+        {
+          "name": "numbers",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param numbers [Array]\n@return [Object] the max result object",
+      "returnTags": [
+        {
+          "comment": "the max result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Logger#info(message)",
+      "class": "Logger",
+      "method": "info",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "NilClass",
+      "throwsTags": [],
+      "doc": "@param message [String]\n@return [NilClass] nil after the operation completes",
+      "returnTags": [
+        {
+          "comment": "nil after the operation completes",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "Logger#error(message)",
+      "class": "Logger",
+      "method": "error",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "NilClass",
+      "throwsTags": [],
+      "doc": "@param message [String]\n@return [NilClass] nil after the operation completes",
+      "returnTags": [
+        {
+          "comment": "nil after the operation completes",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "MailBox#add(email)",
+      "class": "MailBox",
+      "method": "add",
+      "parameters": [
+        {
+          "name": "email",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "email",
+          "comment": "must include @",
+          "kind": "PARAM",
+          "condition": "email.include?(\"@\")"
+        }
+      ],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param email [String] must include @\n@return [Integer] the add result as an integer",
+      "returnTags": [
+        {
+          "comment": "the add result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "MailBox#count()",
+      "class": "MailBox",
+      "method": "count",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@return [Integer] an integer representing the count result\n@return [Integer] 0 if the count is zero or no items exist",
+      "returnTags": [
+        {
+          "comment": "an integer representing the count result",
+          "kind": "RETURN",
+          "condition": "return_value >= 0"
+        },
+        {
+          "comment": "0 if the count is zero or no items exist",
+          "kind": "RETURN",
+          "condition": "return_value == 0"
+        }
+      ]
+    },
+    {
+      "signature": "MapReducer#reduce(array, initial)",
+      "class": "MapReducer",
+      "method": "reduce",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "Array"
+        },
+        {
+          "name": "initial",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param array [Array]\n@param initial [Object]\n@return [Object] the reduce result object",
+      "returnTags": [
+        {
+          "comment": "the reduce result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "MathBox#square(n)",
+      "class": "MathBox",
+      "method": "square",
+      "parameters": [
+        {
+          "name": "n",
+          "type": "Numeric"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Numeric",
+      "throwsTags": [],
+      "doc": "@param n [Numeric]\n@return [Numeric] n squared",
+      "returnTags": [
+        {
+          "comment": "n squared",
+          "kind": "RETURN",
+          "condition": "return_value == n*n"
+        }
+      ]
+    },
+    {
+      "signature": "MathBox#positive?(n)",
+      "class": "MathBox",
+      "method": "positive?",
+      "parameters": [
+        {
+          "name": "n",
+          "type": "Numeric"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param n [Numeric]\n@return [Boolean] true if positive",
+      "returnTags": [
+        {
+          "comment": "true if positive",
+          "kind": "RETURN",
+          "condition": "return_value == (n > 0)"
+        }
+      ]
+    },
+    {
+      "signature": "Metrics#average(values)",
+      "class": "Metrics",
+      "method": "average",
+      "parameters": [
+        {
+          "name": "values",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param values is an empty array",
+          "kind": "THROWS",
+          "condition": "values.length == 0"
+        }
+      ],
+      "doc": "@param values [Array]\n@return [Float] the average value as a float\n@raise [ArgumentError] the param values is an empty array",
+      "returnTags": [
+        {
+          "comment": "the average value as a float",
+          "kind": "RETURN",
+          "condition": "return_value >= 0.0"
+        }
+      ]
+    },
+    {
+      "signature": "Metrics#min(values)",
+      "class": "Metrics",
+      "method": "min",
+      "parameters": [
+        {
+          "name": "values",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param values [Array]\n@return [Object] the min result object",
+      "returnTags": [
+        {
+          "comment": "the min result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Money#add(a, b)",
+      "class": "Money",
+      "method": "add",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Float"
+        },
+        {
+          "name": "b",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param a [Float]\n@param b [Float]\n@return [Float] the add result as a float",
+      "returnTags": [
+        {
+          "comment": "the add result as a float",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Float)"
+        }
+      ]
+    },
+    {
+      "signature": "Money#apply_discount(amount, percent)",
+      "class": "Money",
+      "method": "apply_discount",
+      "parameters": [
+        {
+          "name": "amount",
+          "type": "Float"
+        },
+        {
+          "name": "percent",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "percent",
+          "comment": "0\u2013100",
+          "kind": "PARAM",
+          "condition": "percent >= 0 && percent <= 100"
+        }
+      ],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param amount [Float]\n@param percent [Float] 0\u2013100\n@return [Float] the amount after applying the discount if valid",
+      "returnTags": [
+        {
+          "comment": "the amount after applying the discount if valid",
+          "kind": "RETURN",
+          "condition": "return_value >= 0"
+        }
+      ]
+    },
+    {
+      "signature": "NameBuilder#full(first, last)",
+      "class": "NameBuilder",
+      "method": "full",
+      "parameters": [
+        {
+          "name": "first",
+          "type": "String"
+        },
+        {
+          "name": "last",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param first [String]\n@param last [String]\n@return [String] a string representing the full result",
+      "returnTags": [
+        {
+          "comment": "a string representing the full result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "NameBuilder#initials(first, last)",
+      "class": "NameBuilder",
+      "method": "initials",
+      "parameters": [
+        {
+          "name": "first",
+          "type": "String"
+        },
+        {
+          "name": "last",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param first [String]\n@param last [String]\n@return [String] a string representing the initials result",
+      "returnTags": [
+        {
+          "comment": "a string representing the initials result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Notifier#push(message)",
+      "class": "Notifier",
+      "method": "push",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param message [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Notifier#broadcast(messages)",
+      "class": "Notifier",
+      "method": "broadcast",
+      "parameters": [
+        {
+          "name": "messages",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param messages [Array]\n@return [Integer] the broadcast result as an integer",
+      "returnTags": [
+        {
+          "comment": "the broadcast result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    }
+  ]
+}

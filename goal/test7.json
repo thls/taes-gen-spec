@@ -1,0 +1,569 @@
+{
+  "dataset_part": [
+    {
+      "signature": "Scheduler#every(interval)",
+      "class": "Scheduler",
+      "method": "every",
+      "parameters": [
+        {
+          "name": "interval",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "interval",
+          "comment": "must be > 0",
+          "kind": "PARAM",
+          "condition": "interval > 0"
+        }
+      ],
+      "returnType": "Boolean",
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param interval is less than or equal to zero",
+          "kind": "THROWS",
+          "condition": "interval <= 0"
+        }
+      ],
+      "doc": "@param interval [Integer] must be > 0\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed\n@raise [ArgumentError] the param interval is less than or equal to zero",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Scheduler#run_now(task)",
+      "class": "Scheduler",
+      "method": "run_now",
+      "parameters": [
+        {
+          "name": "task",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "NilClass",
+      "throwsTags": [],
+      "doc": "@param task [Object]\n@return [NilClass] nil after the operation completes",
+      "returnTags": [
+        {
+          "comment": "nil after the operation completes",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "SearchEngine#index(document)",
+      "class": "SearchEngine",
+      "method": "index",
+      "parameters": [
+        {
+          "name": "document",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param document [Object]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "SearchEngine#search(query)",
+      "class": "SearchEngine",
+      "method": "search",
+      "parameters": [
+        {
+          "name": "query",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param query [String]\n@return [Array] an array containing the search results",
+      "returnTags": [
+        {
+          "comment": "an array containing the search results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array)"
+        }
+      ]
+    },
+    {
+      "signature": "Serializer#dump(object)",
+      "class": "Serializer",
+      "method": "dump",
+      "parameters": [
+        {
+          "name": "object",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param object [Object]\n@return [String] a string representing the dump result",
+      "returnTags": [
+        {
+          "comment": "a string representing the dump result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Serializer#load(string)",
+      "class": "Serializer",
+      "method": "load",
+      "parameters": [
+        {
+          "name": "string",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param string [String]\n@return [Object] the load result object",
+      "returnTags": [
+        {
+          "comment": "the load result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "SessionManager#create(user)",
+      "class": "SessionManager",
+      "method": "create",
+      "parameters": [
+        {
+          "name": "user",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "user",
+          "comment": "must not be nil",
+          "kind": "PARAM",
+          "condition": "user != nil"
+        }
+      ],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param user [Object] must not be nil\n@return [String] a string representing the create result",
+      "returnTags": [
+        {
+          "comment": "a string representing the create result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "SessionManager#destroy(token)",
+      "class": "SessionManager",
+      "method": "destroy",
+      "parameters": [
+        {
+          "name": "token",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param token [String]\n@return [Boolean] true if the resource was successfully deleted\n@return [Boolean] false if deletion failed or the resource does not exist",
+      "returnTags": [
+        {
+          "comment": "true if the resource was successfully deleted",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if deletion failed or the resource does not exist",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Settings#set(key, value)",
+      "class": "Settings",
+      "method": "set",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        },
+        {
+          "name": "value",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param key [String]\n@param value [Object]\n@return [Boolean] true if the data was successfully written\n@return [Boolean] false if writing failed",
+      "returnTags": [
+        {
+          "comment": "true if the data was successfully written",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if writing failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Settings#get(key)",
+      "class": "Settings",
+      "method": "get",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param key [String]\n@return [Object, nil] the get object if found\n@return [nil] nil if not found",
+      "returnTags": [
+        {
+          "comment": "the get object if found",
+          "kind": "RETURN",
+          "condition": "return_value != nil"
+        },
+        {
+          "comment": "nil if not found",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "ShopCart#add(item)",
+      "class": "ShopCart",
+      "method": "add",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param item [Object]\n@return [Integer] the add result as an integer",
+      "returnTags": [
+        {
+          "comment": "the add result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "ShopCart#remove(item)",
+      "class": "ShopCart",
+      "method": "remove",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param item [Object]\n@return [Boolean] true if the resource was successfully deleted\n@return [Boolean] false if deletion failed or the resource does not exist",
+      "returnTags": [
+        {
+          "comment": "true if the resource was successfully deleted",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if deletion failed or the resource does not exist",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Snapshot#take(state)",
+      "class": "Snapshot",
+      "method": "take",
+      "parameters": [
+        {
+          "name": "state",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param state [Object]\n@return [String] a string representing the take result",
+      "returnTags": [
+        {
+          "comment": "a string representing the take result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Snapshot#restore(id)",
+      "class": "Snapshot",
+      "method": "restore",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param id [String]\n@return [Object] the restore result object",
+      "returnTags": [
+        {
+          "comment": "the restore result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Sorter#asc(array)",
+      "class": "Sorter",
+      "method": "asc",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param array [Array]\n@return [Array] an array containing the asc results\n@return [Array] an empty array if no results are found",
+      "returnTags": [
+        {
+          "comment": "an array containing the asc results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty array if no results are found",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length == 0"
+        }
+      ]
+    },
+    {
+      "signature": "Sorter#desc(array)",
+      "class": "Sorter",
+      "method": "desc",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param array [Array]\n@return [Array] an array containing the desc results\n@return [Array] an empty array if no results are found",
+      "returnTags": [
+        {
+          "comment": "an array containing the desc results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty array if no results are found",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length == 0"
+        }
+      ]
+    },
+    {
+      "signature": "Statistics#mean(values)",
+      "class": "Statistics",
+      "method": "mean",
+      "parameters": [
+        {
+          "name": "values",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param values is an empty array",
+          "kind": "THROWS",
+          "condition": "values.length == 0"
+        }
+      ],
+      "doc": "@param values [Array]\n@return [Float] the mean value as a float\n@raise [ArgumentError] the param values is an empty array",
+      "returnTags": [
+        {
+          "comment": "the mean value as a float",
+          "kind": "RETURN",
+          "condition": "return_value >= 0.0"
+        }
+      ]
+    },
+    {
+      "signature": "Statistics#median(values)",
+      "class": "Statistics",
+      "method": "median",
+      "parameters": [
+        {
+          "name": "values",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param values [Array]\n@return [Float] the median result as a float",
+      "returnTags": [
+        {
+          "comment": "the median result as a float",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Float)"
+        }
+      ]
+    },
+    {
+      "signature": "StringUtils#uppercase(str)",
+      "class": "StringUtils",
+      "method": "uppercase",
+      "parameters": [
+        {
+          "name": "str",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param str [String]\n@return [String] a string representing the uppercase result",
+      "returnTags": [
+        {
+          "comment": "a string representing the uppercase result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "StringUtils#reverse(str)",
+      "class": "StringUtils",
+      "method": "reverse",
+      "parameters": [
+        {
+          "name": "str",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param str [String]\n@return [String] a string representing the reverse result",
+      "returnTags": [
+        {
+          "comment": "a string representing the reverse result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "SyncService#sync(data)",
+      "class": "SyncService",
+      "method": "sync",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param data [Object]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "SyncService#diff(local, remote)",
+      "class": "SyncService",
+      "method": "diff",
+      "parameters": [
+        {
+          "name": "local",
+          "type": "Object"
+        },
+        {
+          "name": "remote",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param local [Object]\n@param remote [Object]\n@return [Object] the diff result object",
+      "returnTags": [
+        {
+          "comment": "the diff result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    }
+  ]
+}

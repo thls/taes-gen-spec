@@ -1,0 +1,527 @@
+{
+  "dataset_part": [
+    {
+      "signature": "Queue#push(item)",
+      "class": "Queue",
+      "method": "push",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param item [Object]\n@return [Integer] the push result as an integer",
+      "returnTags": [
+        {
+          "comment": "the push result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "Queue#pop()",
+      "class": "Queue",
+      "method": "pop",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@return [Object] the pop result object",
+      "returnTags": [
+        {
+          "comment": "the pop result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Queue#empty?()",
+      "class": "Queue",
+      "method": "empty?",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "QueryBuilder#select(*fields)",
+      "class": "QueryBuilder",
+      "method": "select",
+      "parameters": [
+        {
+          "name": "fields",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "QueryBuilder",
+      "throwsTags": [],
+      "doc": "@param fields [Array]\n@return [QueryBuilder] self",
+      "returnTags": [
+        {
+          "comment": "self",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(QueryBuilder)"
+        }
+      ]
+    },
+    {
+      "signature": "QueryBuilder#where(condition)",
+      "class": "QueryBuilder",
+      "method": "where",
+      "parameters": [
+        {
+          "name": "condition",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "QueryBuilder",
+      "throwsTags": [],
+      "doc": "@param condition [String]\n@return [QueryBuilder] self",
+      "returnTags": [
+        {
+          "comment": "self",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(QueryBuilder)"
+        }
+      ]
+    },
+    {
+      "signature": "QueryBuilder#limit(n)",
+      "class": "QueryBuilder",
+      "method": "limit",
+      "parameters": [
+        {
+          "name": "n",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "n",
+          "comment": "must be >= 0",
+          "kind": "PARAM",
+          "condition": "n >= 0"
+        }
+      ],
+      "returnType": "QueryBuilder",
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param n is negative",
+          "kind": "THROWS",
+          "condition": "n < 0"
+        }
+      ],
+      "doc": "@param n [Integer] must be >= 0\n@return [QueryBuilder] self\n@raise [ArgumentError] the param n is negative",
+      "returnTags": [
+        {
+          "comment": "self",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(QueryBuilder)"
+        }
+      ]
+    },
+    {
+      "signature": "Randomizer#pick(array)",
+      "class": "Randomizer",
+      "method": "pick",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param array is empty",
+          "kind": "THROWS",
+          "condition": "array.length == 0"
+        }
+      ],
+      "doc": "@param array [Array]\n@return [Object] the pick result object\n@raise [ArgumentError] the param array is empty",
+      "returnTags": [
+        {
+          "comment": "the pick result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Randomizer#int(min, max)",
+      "class": "Randomizer",
+      "method": "int",
+      "parameters": [
+        {
+          "name": "min",
+          "type": "Integer"
+        },
+        {
+          "name": "max",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "max",
+          "comment": "must be >= min",
+          "kind": "PARAM",
+          "condition": "max >= min"
+        }
+      ],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param min [Integer]\n@param max [Integer] must be >= min\n@return [Integer] the int result as an integer",
+      "returnTags": [
+        {
+          "comment": "the int result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "RateLimiter#allowed?(key)",
+      "class": "RateLimiter",
+      "method": "allowed?",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param key [String]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "RateLimiter#reset(key)",
+      "class": "RateLimiter",
+      "method": "reset",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param key [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Rectangle#area(width, height)",
+      "class": "Rectangle",
+      "method": "area",
+      "parameters": [
+        {
+          "name": "width",
+          "type": "Float"
+        },
+        {
+          "name": "height",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param width [Float]\n@param height [Float]\n@return [Float] the area result as a float",
+      "returnTags": [
+        {
+          "comment": "the area result as a float",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Float)"
+        }
+      ]
+    },
+    {
+      "signature": "Rectangle#perimeter(width, height)",
+      "class": "Rectangle",
+      "method": "perimeter",
+      "parameters": [
+        {
+          "name": "width",
+          "type": "Float"
+        },
+        {
+          "name": "height",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param width [Float]\n@param height [Float]\n@return [Float] the perimeter result as a float",
+      "returnTags": [
+        {
+          "comment": "the perimeter result as a float",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Float)"
+        }
+      ]
+    },
+    {
+      "signature": "Reporter#print(message)",
+      "class": "Reporter",
+      "method": "print",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "NilClass",
+      "throwsTags": [],
+      "doc": "@param message [String]\n@return [NilClass] nil after the operation completes",
+      "returnTags": [
+        {
+          "comment": "nil after the operation completes",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "Reporter#error(message)",
+      "class": "Reporter",
+      "method": "error",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "NilClass",
+      "throwsTags": [],
+      "doc": "@param message [String]\n@return [NilClass] nil after the operation completes",
+      "returnTags": [
+        {
+          "comment": "nil after the operation completes",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "Reservation#book(item, user)",
+      "class": "Reservation",
+      "method": "book",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "Object"
+        },
+        {
+          "name": "user",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "user",
+          "comment": "must not be nil",
+          "kind": "PARAM",
+          "condition": "user != nil"
+        }
+      ],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param item [Object]\n@param user [Object] must not be nil\n@return [Integer] the book result as an integer",
+      "returnTags": [
+        {
+          "comment": "the book result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "Reservation#cancel(id)",
+      "class": "Reservation",
+      "method": "cancel",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param id [Integer]\n@return [Boolean] true if the operation was successful\n@return [Boolean] false if the operation failed or the resource does not exist",
+      "returnTags": [
+        {
+          "comment": "true if the operation was successful",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed or the resource does not exist",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Router#add_route(path, handler)",
+      "class": "Router",
+      "method": "add_route",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        },
+        {
+          "name": "handler",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param path [String]\n@param handler [Object]\n@return [Integer] the add route result as an integer",
+      "returnTags": [
+        {
+          "comment": "the add route result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "Router#match(path)",
+      "class": "Router",
+      "method": "match",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param path [String]\n@return [Object] the match result object",
+      "returnTags": [
+        {
+          "comment": "the match result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "SafeMath#divide(a, b)",
+      "class": "SafeMath",
+      "method": "divide",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Float"
+        },
+        {
+          "name": "b",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "b",
+          "comment": "must not be zero",
+          "kind": "PARAM",
+          "condition": "b != 0"
+        }
+      ],
+      "returnType": "Float",
+      "throwsTags": [
+        {
+          "exceptionType": "ZeroDivisionError",
+          "comment": "the param b is zero",
+          "kind": "THROWS",
+          "condition": "b == 0"
+        }
+      ],
+      "doc": "@param a [Float]\n@param b [Float] must not be zero\n@return [Float] the divide result as a float\n@raise [ZeroDivisionError] the param b is zero",
+      "returnTags": [
+        {
+          "comment": "the divide result as a float",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Float)"
+        }
+      ]
+    },
+    {
+      "signature": "SafeMath#positive?(n)",
+      "class": "SafeMath",
+      "method": "positive?",
+      "parameters": [
+        {
+          "name": "n",
+          "type": "Numeric"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param n [Numeric]\n@return [Boolean] true if > 0",
+      "returnTags": [
+        {
+          "comment": "true if > 0",
+          "kind": "RETURN",
+          "condition": "return_value == (n > 0)"
+        }
+      ]
+    }
+  ]
+}

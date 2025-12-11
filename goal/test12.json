@@ -1,0 +1,991 @@
+{
+  "dataset_part": [
+    {
+      "signature": "OrderProcessor#process_payment(order_id, payment_method, amount, currency, customer_id)",
+      "class": "OrderProcessor",
+      "method": "process_payment",
+      "parameters": [
+        {
+          "name": "order_id",
+          "type": "Integer"
+        },
+        {
+          "name": "payment_method",
+          "type": "String"
+        },
+        {
+          "name": "amount",
+          "type": "Float"
+        },
+        {
+          "name": "currency",
+          "type": "String"
+        },
+        {
+          "name": "customer_id",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "order_id",
+          "comment": "must be positive and exist in the system",
+          "kind": "PARAM",
+          "condition": "order_id > 0"
+        },
+        {
+          "parameter": "payment_method",
+          "comment": "must be one of: credit_card, debit_card, paypal, bank_transfer",
+          "kind": "PARAM",
+          "condition": "['credit_card', 'debit_card', 'paypal', 'bank_transfer'].include?(payment_method)"
+        },
+        {
+          "parameter": "amount",
+          "comment": "must be greater than zero and less than 1000000",
+          "kind": "PARAM",
+          "condition": "amount > 0 && amount < 1000000"
+        },
+        {
+          "parameter": "currency",
+          "comment": "must be a valid ISO 4217 currency code",
+          "kind": "PARAM",
+          "condition": "currency.length == 3 && currency.match?(/^[A-Z]{3}$/)"
+        },
+        {
+          "parameter": "customer_id",
+          "comment": "must be positive",
+          "kind": "PARAM",
+          "condition": "customer_id > 0"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the transaction details if payment was successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:status] == 'success'"
+        },
+        {
+          "comment": "a hash with error information if payment failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:status] == 'failed'"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param order_id is invalid or does not exist",
+          "kind": "THROWS",
+          "condition": "order_id <= 0"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param payment_method is not one of the supported methods",
+          "kind": "THROWS",
+          "condition": "!['credit_card', 'debit_card', 'paypal', 'bank_transfer'].include?(payment_method)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param amount is less than or equal to zero or exceeds the maximum limit",
+          "kind": "THROWS",
+          "condition": "amount <= 0 || amount >= 1000000"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param currency is not a valid ISO 4217 currency code",
+          "kind": "THROWS",
+          "condition": "currency.length != 3 || !currency.match?(/^[A-Z]{3}$/)"
+        }
+      ],
+      "doc": "@param order_id [Integer] must be positive and exist in the system\n@param payment_method [String] must be one of: credit_card, debit_card, paypal, bank_transfer\n@param amount [Float] must be greater than zero and less than 1000000\n@param currency [String] must be a valid ISO 4217 currency code\n@param customer_id [Integer] must be positive\n@return [Hash] a hash containing the transaction details if payment was successful\n@return [Hash] a hash with error information if payment failed\n@raise [ArgumentError] the param order_id is invalid or does not exist\n@raise [ArgumentError] the param payment_method is not one of the supported methods\n@raise [ArgumentError] the param amount is less than or equal to zero or exceeds the maximum limit\n@raise [ArgumentError] the param currency is not a valid ISO 4217 currency code"
+    },
+    {
+      "signature": "DataTransformer#transform_dataset(source_format, target_format, data, options)",
+      "class": "DataTransformer",
+      "method": "transform_dataset",
+      "parameters": [
+        {
+          "name": "source_format",
+          "type": "String"
+        },
+        {
+          "name": "target_format",
+          "type": "String"
+        },
+        {
+          "name": "data",
+          "type": "Object"
+        },
+        {
+          "name": "options",
+          "type": "Hash"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "source_format",
+          "comment": "must be one of: json, xml, csv, yaml",
+          "kind": "PARAM",
+          "condition": "['json', 'xml', 'csv', 'yaml'].include?(source_format)"
+        },
+        {
+          "parameter": "target_format",
+          "comment": "must be one of: json, xml, csv, yaml",
+          "kind": "PARAM",
+          "condition": "['json', 'xml', 'csv', 'yaml'].include?(target_format)"
+        },
+        {
+          "parameter": "data",
+          "comment": "must not be nil and must be parseable in the source format",
+          "kind": "PARAM",
+          "condition": "data != nil"
+        },
+        {
+          "parameter": "options",
+          "comment": "must be a hash with valid transformation options",
+          "kind": "PARAM",
+          "condition": "options.is_a?(Hash)"
+        }
+      ],
+      "returnType": "String",
+      "returnTags": [
+        {
+          "comment": "the transformed data as a string in the target format",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty string if the transformation resulted in no data",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String) && return_value.length == 0"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param source_format is not a supported format",
+          "kind": "THROWS",
+          "condition": "!['json', 'xml', 'csv', 'yaml'].include?(source_format)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param target_format is not a supported format",
+          "kind": "THROWS",
+          "condition": "!['json', 'xml', 'csv', 'yaml'].include?(target_format)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param data is nil or cannot be parsed",
+          "kind": "THROWS",
+          "condition": "data.nil?"
+        },
+        {
+          "exceptionType": "RuntimeError",
+          "comment": "the transformation failed due to incompatible data structure",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param source_format [String] must be one of: json, xml, csv, yaml\n@param target_format [String] must be one of: json, xml, csv, yaml\n@param data [Object] must not be nil and must be parseable in the source format\n@param options [Hash] must be a hash with valid transformation options\n@return [String] the transformed data as a string in the target format\n@return [String] an empty string if the transformation resulted in no data\n@raise [ArgumentError] the param source_format is not a supported format\n@raise [ArgumentError] the param target_format is not a supported format\n@raise [ArgumentError] the param data is nil or cannot be parsed\n@raise [RuntimeError] the transformation failed due to incompatible data structure"
+    },
+    {
+      "signature": "SecurityManager#validate_and_authorize(user, resource, action, context)",
+      "class": "SecurityManager",
+      "method": "validate_and_authorize",
+      "parameters": [
+        {
+          "name": "user",
+          "type": "Object"
+        },
+        {
+          "name": "resource",
+          "type": "String"
+        },
+        {
+          "name": "action",
+          "type": "String"
+        },
+        {
+          "name": "context",
+          "type": "Hash"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "user",
+          "comment": "must not be nil and must have valid user attributes",
+          "kind": "PARAM",
+          "condition": "user != nil && user.respond_to?(:id)"
+        },
+        {
+          "parameter": "resource",
+          "comment": "must not be empty and must be a valid resource path",
+          "kind": "PARAM",
+          "condition": "resource != nil && resource != ''"
+        },
+        {
+          "parameter": "action",
+          "comment": "must be one of: read, write, delete, execute",
+          "kind": "PARAM",
+          "condition": "['read', 'write', 'delete', 'execute'].include?(action)"
+        },
+        {
+          "parameter": "context",
+          "comment": "must be a hash containing authorization context information",
+          "kind": "PARAM",
+          "condition": "context.is_a?(Hash)"
+        }
+      ],
+      "returnType": "Boolean",
+      "returnTags": [
+        {
+          "comment": "true if the user is authorized to perform the action on the resource",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the user is not authorized or validation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param user is nil or does not have required attributes",
+          "kind": "THROWS",
+          "condition": "user.nil? || !user.respond_to?(:id)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param resource is empty or invalid",
+          "kind": "THROWS",
+          "condition": "resource.nil? || resource == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param action is not one of the supported actions",
+          "kind": "THROWS",
+          "condition": "!['read', 'write', 'delete', 'execute'].include?(action)"
+        },
+        {
+          "exceptionType": "SecurityError",
+          "comment": "a security violation was detected during authorization",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param user [Object] must not be nil and must have valid user attributes\n@param resource [String] must not be empty and must be a valid resource path\n@param action [String] must be one of: read, write, delete, execute\n@param context [Hash] must be a hash containing authorization context information\n@return [Boolean] true if the user is authorized to perform the action on the resource\n@return [Boolean] false if the user is not authorized or validation failed\n@raise [ArgumentError] the param user is nil or does not have required attributes\n@raise [ArgumentError] the param resource is empty or invalid\n@raise [ArgumentError] the param action is not one of the supported actions\n@raise [SecurityError] a security violation was detected during authorization"
+    },
+    {
+      "signature": "ReportGenerator#generate_report(report_type, start_date, end_date, filters, format)",
+      "class": "ReportGenerator",
+      "method": "generate_report",
+      "parameters": [
+        {
+          "name": "report_type",
+          "type": "String"
+        },
+        {
+          "name": "start_date",
+          "type": "Date"
+        },
+        {
+          "name": "end_date",
+          "type": "Date"
+        },
+        {
+          "name": "filters",
+          "type": "Hash"
+        },
+        {
+          "name": "format",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "report_type",
+          "comment": "must be one of: sales, inventory, financial, analytics",
+          "kind": "PARAM",
+          "condition": "['sales', 'inventory', 'financial', 'analytics'].include?(report_type)"
+        },
+        {
+          "parameter": "start_date",
+          "comment": "must be a valid date and not in the future",
+          "kind": "PARAM",
+          "condition": "start_date.is_a?(Date) && start_date <= Date.today"
+        },
+        {
+          "parameter": "end_date",
+          "comment": "must be a valid date, not in the future, and after start_date",
+          "kind": "PARAM",
+          "condition": "end_date.is_a?(Date) && end_date <= Date.today && end_date >= start_date"
+        },
+        {
+          "parameter": "filters",
+          "comment": "must be a hash with valid filter criteria",
+          "kind": "PARAM",
+          "condition": "filters.is_a?(Hash)"
+        },
+        {
+          "parameter": "format",
+          "comment": "must be one of: pdf, excel, csv, html",
+          "kind": "PARAM",
+          "condition": "['pdf', 'excel', 'csv', 'html'].include?(format)"
+        }
+      ],
+      "returnType": "String",
+      "returnTags": [
+        {
+          "comment": "the file path of the generated report if successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty string if report generation failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String) && return_value.length == 0"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param report_type is not a supported report type",
+          "kind": "THROWS",
+          "condition": "!['sales', 'inventory', 'financial', 'analytics'].include?(report_type)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param start_date is invalid or in the future",
+          "kind": "THROWS",
+          "condition": "!start_date.is_a?(Date) || start_date > Date.today"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param end_date is invalid, in the future, or before start_date",
+          "kind": "THROWS",
+          "condition": "!end_date.is_a?(Date) || end_date > Date.today || end_date < start_date"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param format is not a supported output format",
+          "kind": "THROWS",
+          "condition": "!['pdf', 'excel', 'csv', 'html'].include?(format)"
+        }
+      ],
+      "doc": "@param report_type [String] must be one of: sales, inventory, financial, analytics\n@param start_date [Date] must be a valid date and not in the future\n@param end_date [Date] must be a valid date, not in the future, and after start_date\n@param filters [Hash] must be a hash with valid filter criteria\n@param format [String] must be one of: pdf, excel, csv, html\n@return [String] the file path of the generated report if successful\n@return [String] an empty string if report generation failed\n@raise [ArgumentError] the param report_type is not a supported report type\n@raise [ArgumentError] the param start_date is invalid or in the future\n@raise [ArgumentError] the param end_date is invalid, in the future, or before start_date\n@raise [ArgumentError] the param format is not a supported output format"
+    },
+    {
+      "signature": "NotificationService#send_notification(channel, recipient, message, priority, options)",
+      "class": "NotificationService",
+      "method": "send_notification",
+      "parameters": [
+        {
+          "name": "channel",
+          "type": "String"
+        },
+        {
+          "name": "recipient",
+          "type": "String"
+        },
+        {
+          "name": "message",
+          "type": "String"
+        },
+        {
+          "name": "priority",
+          "type": "String"
+        },
+        {
+          "name": "options",
+          "type": "Hash"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "channel",
+          "comment": "must be one of: email, sms, push, webhook",
+          "kind": "PARAM",
+          "condition": "['email', 'sms', 'push', 'webhook'].include?(channel)"
+        },
+        {
+          "parameter": "recipient",
+          "comment": "must not be empty and must be valid for the channel type",
+          "kind": "PARAM",
+          "condition": "recipient != nil && recipient != ''"
+        },
+        {
+          "parameter": "message",
+          "comment": "must not be empty and must be between 1 and 5000 characters",
+          "kind": "PARAM",
+          "condition": "message != nil && message.length > 0 && message.length <= 5000"
+        },
+        {
+          "parameter": "priority",
+          "comment": "must be one of: low, normal, high, urgent",
+          "kind": "PARAM",
+          "condition": "['low', 'normal', 'high', 'urgent'].include?(priority)"
+        },
+        {
+          "parameter": "options",
+          "comment": "must be a hash with valid notification options",
+          "kind": "PARAM",
+          "condition": "options.is_a?(Hash)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the notification delivery status and message_id if successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:status] == 'sent'"
+        },
+        {
+          "comment": "a hash with error information if notification delivery failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:status] == 'failed'"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param channel is not a supported notification channel",
+          "kind": "THROWS",
+          "condition": "!['email', 'sms', 'push', 'webhook'].include?(channel)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param recipient is empty or invalid for the channel",
+          "kind": "THROWS",
+          "condition": "recipient.nil? || recipient == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param message is empty or exceeds the maximum length of 5000 characters",
+          "kind": "THROWS",
+          "condition": "message.nil? || message.length == 0 || message.length > 5000"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param priority is not one of the supported priority levels",
+          "kind": "THROWS",
+          "condition": "!['low', 'normal', 'high', 'urgent'].include?(priority)"
+        }
+      ],
+      "doc": "@param channel [String] must be one of: email, sms, push, webhook\n@param recipient [String] must not be empty and must be valid for the channel type\n@param message [String] must not be empty and must be between 1 and 5000 characters\n@param priority [String] must be one of: low, normal, high, urgent\n@param options [Hash] must be a hash with valid notification options\n@return [Hash] a hash containing the notification delivery status and message_id if successful\n@return [Hash] a hash with error information if notification delivery failed\n@raise [ArgumentError] the param channel is not a supported notification channel\n@raise [ArgumentError] the param recipient is empty or invalid for the channel\n@raise [ArgumentError] the param message is empty or exceeds the maximum length of 5000 characters\n@raise [ArgumentError] the param priority is not one of the supported priority levels"
+    },
+    {
+      "signature": "InventoryManager#update_stock(product_id, quantity, warehouse_id, reason, user_id)",
+      "class": "InventoryManager",
+      "method": "update_stock",
+      "parameters": [
+        {
+          "name": "product_id",
+          "type": "Integer"
+        },
+        {
+          "name": "quantity",
+          "type": "Integer"
+        },
+        {
+          "name": "warehouse_id",
+          "type": "Integer"
+        },
+        {
+          "name": "reason",
+          "type": "String"
+        },
+        {
+          "name": "user_id",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "product_id",
+          "comment": "must be positive and exist in the catalog",
+          "kind": "PARAM",
+          "condition": "product_id > 0"
+        },
+        {
+          "parameter": "quantity",
+          "comment": "must be an integer between -10000 and 10000",
+          "kind": "PARAM",
+          "condition": "quantity.is_a?(Integer) && quantity >= -10000 && quantity <= 10000"
+        },
+        {
+          "parameter": "warehouse_id",
+          "comment": "must be positive and exist in the system",
+          "kind": "PARAM",
+          "condition": "warehouse_id > 0"
+        },
+        {
+          "parameter": "reason",
+          "comment": "must not be empty and must be between 5 and 200 characters",
+          "kind": "PARAM",
+          "condition": "reason != nil && reason.length >= 5 && reason.length <= 200"
+        },
+        {
+          "parameter": "user_id",
+          "comment": "must be positive",
+          "kind": "PARAM",
+          "condition": "user_id > 0"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the updated stock information if successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:success] == true"
+        },
+        {
+          "comment": "a hash with error details if the stock update failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:success] == false"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param product_id is invalid or does not exist",
+          "kind": "THROWS",
+          "condition": "product_id <= 0"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param quantity is out of the allowed range",
+          "kind": "THROWS",
+          "condition": "!quantity.is_a?(Integer) || quantity < -10000 || quantity > 10000"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param warehouse_id is invalid or does not exist",
+          "kind": "THROWS",
+          "condition": "warehouse_id <= 0"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param reason is empty or does not meet length requirements",
+          "kind": "THROWS",
+          "condition": "reason.nil? || reason.length < 5 || reason.length > 200"
+        },
+        {
+          "exceptionType": "RuntimeError",
+          "comment": "insufficient stock available for the requested operation",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param product_id [Integer] must be positive and exist in the catalog\n@param quantity [Integer] must be an integer between -10000 and 10000\n@param warehouse_id [Integer] must be positive and exist in the system\n@param reason [String] must not be empty and must be between 5 and 200 characters\n@param user_id [Integer] must be positive\n@return [Hash] a hash containing the updated stock information if successful\n@return [Hash] a hash with error details if the stock update failed\n@raise [ArgumentError] the param product_id is invalid or does not exist\n@raise [ArgumentError] the param quantity is out of the allowed range\n@raise [ArgumentError] the param warehouse_id is invalid or does not exist\n@raise [ArgumentError] the param reason is empty or does not meet length requirements\n@raise [RuntimeError] insufficient stock available for the requested operation"
+    },
+    {
+      "signature": "UserManager#create_user_with_profile(email, password, profile_data, role, permissions)",
+      "class": "UserManager",
+      "method": "create_user_with_profile",
+      "parameters": [
+        {
+          "name": "email",
+          "type": "String"
+        },
+        {
+          "name": "password",
+          "type": "String"
+        },
+        {
+          "name": "profile_data",
+          "type": "Hash"
+        },
+        {
+          "name": "role",
+          "type": "String"
+        },
+        {
+          "name": "permissions",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "email",
+          "comment": "must be a valid email address format",
+          "kind": "PARAM",
+          "condition": "email.include?('@') && email.include?('.') && email.length >= 5"
+        },
+        {
+          "parameter": "password",
+          "comment": "must be at least 8 characters and contain at least one number and one letter",
+          "kind": "PARAM",
+          "condition": "password.length >= 8 && password.match?(/[0-9]/) && password.match?(/[a-zA-Z]/)"
+        },
+        {
+          "parameter": "profile_data",
+          "comment": "must be a hash with required profile fields",
+          "kind": "PARAM",
+          "condition": "profile_data.is_a?(Hash) && profile_data.has_key?(:name)"
+        },
+        {
+          "parameter": "role",
+          "comment": "must be one of: admin, user, moderator, guest",
+          "kind": "PARAM",
+          "condition": "['admin', 'user', 'moderator', 'guest'].include?(role)"
+        },
+        {
+          "parameter": "permissions",
+          "comment": "must be an array of valid permission strings",
+          "kind": "PARAM",
+          "condition": "permissions.is_a?(Array) && permissions.all? { |p| p.is_a?(String) }"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the created user information and profile if successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:user_id] != nil"
+        },
+        {
+          "comment": "a hash with validation errors if user creation failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:errors] != nil"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param email is not a valid email address format",
+          "kind": "THROWS",
+          "condition": "!email.include?('@') || !email.include?('.') || email.length < 5"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param password does not meet the security requirements",
+          "kind": "THROWS",
+          "condition": "password.length < 8 || !password.match?(/[0-9]/) || !password.match?(/[a-zA-Z]/)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param profile_data is missing required fields",
+          "kind": "THROWS",
+          "condition": "!profile_data.is_a?(Hash) || !profile_data.has_key?(:name)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param role is not one of the supported roles",
+          "kind": "THROWS",
+          "condition": "!['admin', 'user', 'moderator', 'guest'].include?(role)"
+        },
+        {
+          "exceptionType": "RuntimeError",
+          "comment": "the email address is already registered in the system",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param email [String] must be a valid email address format\n@param password [String] must be at least 8 characters and contain at least one number and one letter\n@param profile_data [Hash] must be a hash with required profile fields\n@param role [String] must be one of: admin, user, moderator, guest\n@param permissions [Array] must be an array of valid permission strings\n@return [Hash] a hash containing the created user information and profile if successful\n@return [Hash] a hash with validation errors if user creation failed\n@raise [ArgumentError] the param email is not a valid email address format\n@raise [ArgumentError] the param password does not meet the security requirements\n@raise [ArgumentError] the param profile_data is missing required fields\n@raise [ArgumentError] the param role is not one of the supported roles\n@raise [RuntimeError] the email address is already registered in the system"
+    },
+    {
+      "signature": "AnalyticsEngine#calculate_metrics(data_source, metrics, time_range, filters, aggregation)",
+      "class": "AnalyticsEngine",
+      "method": "calculate_metrics",
+      "parameters": [
+        {
+          "name": "data_source",
+          "type": "String"
+        },
+        {
+          "name": "metrics",
+          "type": "Array"
+        },
+        {
+          "name": "time_range",
+          "type": "Hash"
+        },
+        {
+          "name": "filters",
+          "type": "Hash"
+        },
+        {
+          "name": "aggregation",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "data_source",
+          "comment": "must be a valid data source identifier",
+          "kind": "PARAM",
+          "condition": "data_source != nil && data_source != ''"
+        },
+        {
+          "parameter": "metrics",
+          "comment": "must be a non-empty array of metric names",
+          "kind": "PARAM",
+          "condition": "metrics.is_a?(Array) && metrics.length > 0"
+        },
+        {
+          "parameter": "time_range",
+          "comment": "must be a hash with start and end date keys",
+          "kind": "PARAM",
+          "condition": "time_range.is_a?(Hash) && time_range.has_key?(:start) && time_range.has_key?(:end)"
+        },
+        {
+          "parameter": "filters",
+          "comment": "must be a hash with valid filter criteria",
+          "kind": "PARAM",
+          "condition": "filters.is_a?(Hash)"
+        },
+        {
+          "parameter": "aggregation",
+          "comment": "must be one of: sum, average, count, min, max",
+          "kind": "PARAM",
+          "condition": "['sum', 'average', 'count', 'min', 'max'].include?(aggregation)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the calculated metrics if successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:metrics] != nil"
+        },
+        {
+          "comment": "a hash with error information if metric calculation failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:error] != nil"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param data_source is empty or invalid",
+          "kind": "THROWS",
+          "condition": "data_source.nil? || data_source == ''"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param metrics is empty or not an array",
+          "kind": "THROWS",
+          "condition": "!metrics.is_a?(Array) || metrics.length == 0"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param time_range is missing required start or end keys",
+          "kind": "THROWS",
+          "condition": "!time_range.is_a?(Hash) || !time_range.has_key?(:start) || !time_range.has_key?(:end)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param aggregation is not one of the supported aggregation types",
+          "kind": "THROWS",
+          "condition": "!['sum', 'average', 'count', 'min', 'max'].include?(aggregation)"
+        }
+      ],
+      "doc": "@param data_source [String] must be a valid data source identifier\n@param metrics [Array] must be a non-empty array of metric names\n@param time_range [Hash] must be a hash with start and end date keys\n@param filters [Hash] must be a hash with valid filter criteria\n@param aggregation [String] must be one of: sum, average, count, min, max\n@return [Hash] a hash containing the calculated metrics if successful\n@return [Hash] a hash with error information if metric calculation failed\n@raise [ArgumentError] the param data_source is empty or invalid\n@raise [ArgumentError] the param metrics is empty or not an array\n@raise [ArgumentError] the param time_range is missing required start or end keys\n@raise [ArgumentError] the param aggregation is not one of the supported aggregation types"
+    },
+    {
+      "signature": "WorkflowEngine#execute_workflow(workflow_id, input_data, context, options, callback)",
+      "class": "WorkflowEngine",
+      "method": "execute_workflow",
+      "parameters": [
+        {
+          "name": "workflow_id",
+          "type": "String"
+        },
+        {
+          "name": "input_data",
+          "type": "Hash"
+        },
+        {
+          "name": "context",
+          "type": "Hash"
+        },
+        {
+          "name": "options",
+          "type": "Hash"
+        },
+        {
+          "name": "callback",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "workflow_id",
+          "comment": "must be a valid workflow identifier UUID format",
+          "kind": "PARAM",
+          "condition": "workflow_id.match?(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i)"
+        },
+        {
+          "parameter": "input_data",
+          "comment": "must be a hash with workflow input parameters",
+          "kind": "PARAM",
+          "condition": "input_data.is_a?(Hash)"
+        },
+        {
+          "parameter": "context",
+          "comment": "must be a hash containing execution context information",
+          "kind": "PARAM",
+          "condition": "context.is_a?(Hash)"
+        },
+        {
+          "parameter": "options",
+          "comment": "must be a hash with valid workflow execution options",
+          "kind": "PARAM",
+          "condition": "options.is_a?(Hash)"
+        },
+        {
+          "parameter": "callback",
+          "comment": "must be a callable object or nil",
+          "kind": "PARAM",
+          "condition": "callback.nil? || callback.respond_to?(:call)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the workflow execution result if successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:status] == 'completed'"
+        },
+        {
+          "comment": "a hash with workflow execution status and intermediate results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:status] == 'running'"
+        },
+        {
+          "comment": "a hash with error information if workflow execution failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:status] == 'failed'"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param workflow_id is not a valid UUID format",
+          "kind": "THROWS",
+          "condition": "!workflow_id.match?(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param input_data is not a hash",
+          "kind": "THROWS",
+          "condition": "!input_data.is_a?(Hash)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param callback is not nil and not callable",
+          "kind": "THROWS",
+          "condition": "!callback.nil? && !callback.respond_to?(:call)"
+        },
+        {
+          "exceptionType": "RuntimeError",
+          "comment": "the workflow with the given id does not exist",
+          "kind": "THROWS",
+          "condition": "false"
+        }
+      ],
+      "doc": "@param workflow_id [String] must be a valid workflow identifier UUID format\n@param input_data [Hash] must be a hash with workflow input parameters\n@param context [Hash] must be a hash containing execution context information\n@param options [Hash] must be a hash with valid workflow execution options\n@param callback [Object] must be a callable object or nil\n@return [Hash] a hash containing the workflow execution result if successful\n@return [Hash] a hash with workflow execution status and intermediate results\n@return [Hash] a hash with error information if workflow execution failed\n@raise [ArgumentError] the param workflow_id is not a valid UUID format\n@raise [ArgumentError] the param input_data is not a hash\n@raise [ArgumentError] the param callback is not nil and not callable\n@raise [RuntimeError] the workflow with the given id does not exist"
+    },
+    {
+      "signature": "CacheManager#bulk_operations(operations, strategy, ttl, namespace, options)",
+      "class": "CacheManager",
+      "method": "bulk_operations",
+      "parameters": [
+        {
+          "name": "operations",
+          "type": "Array"
+        },
+        {
+          "name": "strategy",
+          "type": "String"
+        },
+        {
+          "name": "ttl",
+          "type": "Integer"
+        },
+        {
+          "name": "namespace",
+          "type": "String"
+        },
+        {
+          "name": "options",
+          "type": "Hash"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "operations",
+          "comment": "must be a non-empty array of cache operation hashes",
+          "kind": "PARAM",
+          "condition": "operations.is_a?(Array) && operations.length > 0 && operations.length <= 1000"
+        },
+        {
+          "parameter": "strategy",
+          "comment": "must be one of: write_through, write_back, write_around",
+          "kind": "PARAM",
+          "condition": "['write_through', 'write_back', 'write_around'].include?(strategy)"
+        },
+        {
+          "parameter": "ttl",
+          "comment": "must be a positive integer between 1 and 86400 seconds",
+          "kind": "PARAM",
+          "condition": "ttl.is_a?(Integer) && ttl > 0 && ttl <= 86400"
+        },
+        {
+          "parameter": "namespace",
+          "comment": "must not be empty and must be a valid namespace identifier",
+          "kind": "PARAM",
+          "condition": "namespace != nil && namespace != '' && namespace.match?(/^[a-z0-9_]+$/)"
+        },
+        {
+          "parameter": "options",
+          "comment": "must be a hash with valid cache operation options",
+          "kind": "PARAM",
+          "condition": "options.is_a?(Hash)"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the results of all cache operations if successful",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:success] == true"
+        },
+        {
+          "comment": "a hash with partial results and error information if some operations failed",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash) && return_value[:partial] == true"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param operations is empty or exceeds the maximum limit of 1000",
+          "kind": "THROWS",
+          "condition": "!operations.is_a?(Array) || operations.length == 0 || operations.length > 1000"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param strategy is not one of the supported cache strategies",
+          "kind": "THROWS",
+          "condition": "!['write_through', 'write_back', 'write_around'].include?(strategy)"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param ttl is not within the allowed range of 1 to 86400 seconds",
+          "kind": "THROWS",
+          "condition": "!ttl.is_a?(Integer) || ttl <= 0 || ttl > 86400"
+        },
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param namespace is empty or contains invalid characters",
+          "kind": "THROWS",
+          "condition": "namespace.nil? || namespace == '' || !namespace.match?(/^[a-z0-9_]+$/)"
+        }
+      ],
+      "doc": "@param operations [Array] must be a non-empty array of cache operation hashes\n@param strategy [String] must be one of: write_through, write_back, write_around\n@param ttl [Integer] must be a positive integer between 1 and 86400 seconds\n@param namespace [String] must not be empty and must be a valid namespace identifier\n@param options [Hash] must be a hash with valid cache operation options\n@return [Hash] a hash containing the results of all cache operations if successful\n@return [Hash] a hash with partial results and error information if some operations failed\n@raise [ArgumentError] the param operations is empty or exceeds the maximum limit of 1000\n@raise [ArgumentError] the param strategy is not one of the supported cache strategies\n@raise [ArgumentError] the param ttl is not within the allowed range of 1 to 86400 seconds\n@raise [ArgumentError] the param namespace is empty or contains invalid characters"
+    }
+  ]
+}

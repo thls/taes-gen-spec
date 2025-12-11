@@ -1,0 +1,1628 @@
+{
+  "dataset_part": [
+    {
+      "signature": "AuthService#login(email, password)",
+      "class": "AuthService",
+      "method": "login",
+      "parameters": [
+        {
+          "name": "email",
+          "type": "String"
+        },
+        {
+          "name": "password",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "email",
+          "comment": "must contain @",
+          "kind": "PARAM",
+          "condition": "email.include?(\"@\")"
+        }
+      ],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param email [String] must contain @\n@param password [String]\n@return [String] a string representing the login result",
+      "returnTags": [
+        {
+          "comment": "a string representing the login result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "AuthService#logout(token)",
+      "class": "AuthService",
+      "method": "logout",
+      "parameters": [
+        {
+          "name": "token",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param token [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Bank#deposit(account, amount)",
+      "class": "Bank",
+      "method": "deposit",
+      "parameters": [
+        {
+          "name": "account",
+          "type": "Object"
+        },
+        {
+          "name": "amount",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "amount",
+          "comment": "must be > 0",
+          "kind": "PARAM",
+          "condition": "amount > 0"
+        }
+      ],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param account [Object]\n@param amount [Float] must be > 0\n@return [Float] the deposit result as a float",
+      "returnTags": [
+        {
+          "comment": "the deposit result as a float",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Float)"
+        }
+      ]
+    },
+    {
+      "signature": "Bank#withdraw(account, amount)",
+      "class": "Bank",
+      "method": "withdraw",
+      "parameters": [
+        {
+          "name": "account",
+          "type": "Object"
+        },
+        {
+          "name": "amount",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "amount",
+          "comment": "must be >= 0",
+          "kind": "PARAM",
+          "condition": "amount >= 0"
+        }
+      ],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param account [Object]\n@param amount [Float] must be >= 0\n@return [Float] the withdraw result as a float",
+      "returnTags": [
+        {
+          "comment": "the withdraw result as a float",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Float)"
+        }
+      ]
+    },
+    {
+      "signature": "Billing#invoice(customer, amount)",
+      "class": "Billing",
+      "method": "invoice",
+      "parameters": [
+        {
+          "name": "customer",
+          "type": "String"
+        },
+        {
+          "name": "amount",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param customer [String]\n@param amount [Float]\n@return [String] a string representing the invoice result",
+      "returnTags": [
+        {
+          "comment": "a string representing the invoice result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Billing#cancel(invoice_id)",
+      "class": "Billing",
+      "method": "cancel",
+      "parameters": [
+        {
+          "name": "invoice_id",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param invoice_id [String]\n@return [Boolean] true if the operation was successful\n@return [Boolean] false if the operation failed or the resource does not exist",
+      "returnTags": [
+        {
+          "comment": "true if the operation was successful",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed or the resource does not exist",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Cache#get(key)",
+      "class": "Cache",
+      "method": "get",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param key [String]\n@return [Object, nil] the get object if found\n@return [nil] nil if not found",
+      "returnTags": [
+        {
+          "comment": "the get object if found",
+          "kind": "RETURN",
+          "condition": "return_value != nil"
+        },
+        {
+          "comment": "nil if not found",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "Cache#set(key, value)",
+      "class": "Cache",
+      "method": "set",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        },
+        {
+          "name": "value",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param key [String]\n@param value [Object]\n@return [Boolean] true if the data was successfully written\n@return [Boolean] false if writing failed",
+      "returnTags": [
+        {
+          "comment": "true if the data was successfully written",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if writing failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Compressor#zip(content)",
+      "class": "Compressor",
+      "method": "zip",
+      "parameters": [
+        {
+          "name": "content",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param content [String]\n@return [String] a string representing the zip result",
+      "returnTags": [
+        {
+          "comment": "a string representing the zip result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Compressor#unzip(data)",
+      "class": "Compressor",
+      "method": "unzip",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param data [String]\n@return [String] a string representing the unzip result",
+      "returnTags": [
+        {
+          "comment": "a string representing the unzip result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Config#load(path)",
+      "class": "Config",
+      "method": "load",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param path [String]\n@return [Object] the load result object",
+      "returnTags": [
+        {
+          "comment": "the load result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Config#save(path, data)",
+      "class": "Config",
+      "method": "save",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        },
+        {
+          "name": "data",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param path [String]\n@param data [Object]\n@return [Boolean] true if the data was successfully written\n@return [Boolean] false if writing failed",
+      "returnTags": [
+        {
+          "comment": "true if the data was successfully written",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if writing failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Crypto#hash(text)",
+      "class": "Crypto",
+      "method": "hash",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [String] a hash containing the hash result",
+      "returnTags": [
+        {
+          "comment": "a hash containing the hash result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Crypto#verify(text, hash)",
+      "class": "Crypto",
+      "method": "verify",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        },
+        {
+          "name": "hash",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@param hash [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "DataTable#add_row(row)",
+      "class": "DataTable",
+      "method": "add_row",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param row [Object]\n@return [Integer] the add row result as an integer",
+      "returnTags": [
+        {
+          "comment": "the add row result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "DataTable#row(index)",
+      "class": "DataTable",
+      "method": "row",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "index",
+          "comment": "must be >= 0",
+          "kind": "PARAM",
+          "condition": "index >= 0"
+        }
+      ],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param index [Integer] must be >= 0\n@return [Object] the row result object",
+      "returnTags": [
+        {
+          "comment": "the row result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Downloader#fetch(url)",
+      "class": "Downloader",
+      "method": "fetch",
+      "parameters": [
+        {
+          "name": "url",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "url",
+          "comment": "must start with http",
+          "kind": "PARAM",
+          "condition": "url.start_with?(\"http\")"
+        }
+      ],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param url [String] must start with http\n@return [String] a string representing the fetch result",
+      "returnTags": [
+        {
+          "comment": "a string representing the fetch result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Downloader#headers(url)",
+      "class": "Downloader",
+      "method": "headers",
+      "parameters": [
+        {
+          "name": "url",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param url [String]\n@return [Object] the headers result object",
+      "returnTags": [
+        {
+          "comment": "the headers result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Encryptor#encode(text)",
+      "class": "Encryptor",
+      "method": "encode",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [String] the encode result as a string",
+      "returnTags": [
+        {
+          "comment": "the encode result as a string",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Encryptor#decode(encoded)",
+      "class": "Encryptor",
+      "method": "decode",
+      "parameters": [
+        {
+          "name": "encoded",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param encoded [String]\n@return [String] the decode result as a string",
+      "returnTags": [
+        {
+          "comment": "the decode result as a string",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "EventBus#publish(event)",
+      "class": "EventBus",
+      "method": "publish",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param event [Object]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "EventBus#subscribe(name, callback)",
+      "class": "EventBus",
+      "method": "subscribe",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String"
+        },
+        {
+          "name": "callback",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param name [String]\n@param callback [Object]\n@return [Integer] the subscribe result as an integer",
+      "returnTags": [
+        {
+          "comment": "the subscribe result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "FileStore#read(path)",
+      "class": "FileStore",
+      "method": "read",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param path [String]\n@return [String] the response body or content as a string",
+      "returnTags": [
+        {
+          "comment": "the response body or content as a string",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "FileStore#write(path, content)",
+      "class": "FileStore",
+      "method": "write",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        },
+        {
+          "name": "content",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param path [String]\n@param content [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "HTMLBuilder#tag(name, content)",
+      "class": "HTMLBuilder",
+      "method": "tag",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String"
+        },
+        {
+          "name": "content",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param name [String]\n@param content [String]\n@return [String] a string representing the tag result",
+      "returnTags": [
+        {
+          "comment": "a string representing the tag result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "HTMLBuilder#escape(text)",
+      "class": "HTMLBuilder",
+      "method": "escape",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [String] a string representing the escape result",
+      "returnTags": [
+        {
+          "comment": "a string representing the escape result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "ImageTool#resize(image, width, height)",
+      "class": "ImageTool",
+      "method": "resize",
+      "parameters": [
+        {
+          "name": "image",
+          "type": "Object"
+        },
+        {
+          "name": "width",
+          "type": "Integer"
+        },
+        {
+          "name": "height",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "width",
+          "comment": "must be >= 1",
+          "kind": "PARAM",
+          "condition": "width >= 1"
+        }
+      ],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param image [Object]\n@param width [Integer] must be >= 1\n@param height [Integer]\n@return [Object] the resize result object",
+      "returnTags": [
+        {
+          "comment": "the resize result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "ImageTool#format(image, type)",
+      "class": "ImageTool",
+      "method": "format",
+      "parameters": [
+        {
+          "name": "image",
+          "type": "Object"
+        },
+        {
+          "name": "type",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param image [Object]\n@param type [String]\n@return [Object] the format result object",
+      "returnTags": [
+        {
+          "comment": "the format result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "JSONParser#parse(json)",
+      "class": "JSONParser",
+      "method": "parse",
+      "parameters": [
+        {
+          "name": "json",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param json [String]\n@return [Object] the parse result object",
+      "returnTags": [
+        {
+          "comment": "the parse result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "JSONParser#stringify(data)",
+      "class": "JSONParser",
+      "method": "stringify",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param data [Object]\n@return [String] a string representing the stringify result",
+      "returnTags": [
+        {
+          "comment": "a string representing the stringify result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Logger#info(message)",
+      "class": "Logger",
+      "method": "info",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param message [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Logger#error(message)",
+      "class": "Logger",
+      "method": "error",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param message [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Mailer#send(to, body)",
+      "class": "Mailer",
+      "method": "send",
+      "parameters": [
+        {
+          "name": "to",
+          "type": "String"
+        },
+        {
+          "name": "body",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "to",
+          "comment": "must contain @",
+          "kind": "PARAM",
+          "condition": "to.include?(\"@\")"
+        }
+      ],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param to [String] must contain @\n@param body [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Mailer#template(name)",
+      "class": "Mailer",
+      "method": "template",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param name [String]\n@return [String] a string representing the template result",
+      "returnTags": [
+        {
+          "comment": "a string representing the template result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "MathTool#sum(a, b)",
+      "class": "MathTool",
+      "method": "sum",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Integer"
+        },
+        {
+          "name": "b",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param a [Integer]\n@param b [Integer]\n@return [Integer] the sum result as an integer",
+      "returnTags": [
+        {
+          "comment": "the sum result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "MathTool#multiply(a, b)",
+      "class": "MathTool",
+      "method": "multiply",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Integer"
+        },
+        {
+          "name": "b",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param a [Integer]\n@param b [Integer]\n@return [Integer] the multiply result as an integer",
+      "returnTags": [
+        {
+          "comment": "the multiply result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "Parser#tokenize(text)",
+      "class": "Parser",
+      "method": "tokenize",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [Object] the tokenize result object",
+      "returnTags": [
+        {
+          "comment": "the tokenize result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Parser#valid?(text)",
+      "class": "Parser",
+      "method": "valid?",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Queue#push(item)",
+      "class": "Queue",
+      "method": "push",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param item [Object]\n@return [Integer] the push result as an integer",
+      "returnTags": [
+        {
+          "comment": "the push result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "Queue#pop()",
+      "class": "Queue",
+      "method": "pop",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@return [Object] the pop result object",
+      "returnTags": [
+        {
+          "comment": "the pop result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Randomizer#rand(limit)",
+      "class": "Randomizer",
+      "method": "rand",
+      "parameters": [
+        {
+          "name": "limit",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "limit",
+          "comment": "must be > 0",
+          "kind": "PARAM",
+          "condition": "limit > 0"
+        }
+      ],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param limit [Integer] must be > 0\n@return [Integer] the rand result as an integer",
+      "returnTags": [
+        {
+          "comment": "the rand result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "Randomizer#choice(list)",
+      "class": "Randomizer",
+      "method": "choice",
+      "parameters": [
+        {
+          "name": "list",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param list [Object]\n@return [Object] the choice result object",
+      "returnTags": [
+        {
+          "comment": "the choice result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Serializer#dump(obj)",
+      "class": "Serializer",
+      "method": "dump",
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param obj [Object]\n@return [String] a string representing the dump result",
+      "returnTags": [
+        {
+          "comment": "a string representing the dump result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Serializer#load(text)",
+      "class": "Serializer",
+      "method": "load",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [Object] the load result object",
+      "returnTags": [
+        {
+          "comment": "the load result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Statistics#average(a, b)",
+      "class": "Statistics",
+      "method": "average",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Float"
+        },
+        {
+          "name": "b",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param a [Float]\n@param b [Float]\n@return [Float] the average value as a float",
+      "returnTags": [
+        {
+          "comment": "the average value as a float",
+          "kind": "RETURN",
+          "condition": "return_value >= 0.0"
+        }
+      ]
+    },
+    {
+      "signature": "Statistics#max(a, b)",
+      "class": "Statistics",
+      "method": "max",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Float"
+        },
+        {
+          "name": "b",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param a [Float]\n@param b [Float]\n@return [Float] the max result as a float",
+      "returnTags": [
+        {
+          "comment": "the max result as a float",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Float)"
+        }
+      ]
+    },
+    {
+      "signature": "TextUtil#upcase(text)",
+      "class": "TextUtil",
+      "method": "upcase",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [String] a string representing the upcase result",
+      "returnTags": [
+        {
+          "comment": "a string representing the upcase result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "TextUtil#concat(a, b)",
+      "class": "TextUtil",
+      "method": "concat",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "String"
+        },
+        {
+          "name": "b",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param a [String]\n@param b [String]\n@return [String] a string representing the concat result",
+      "returnTags": [
+        {
+          "comment": "a string representing the concat result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Validator#email?(text)",
+      "class": "Validator",
+      "method": "email?",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Validator#number?(text)",
+      "class": "Validator",
+      "method": "number?",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Versioning#increment(version)",
+      "class": "Versioning",
+      "method": "increment",
+      "parameters": [
+        {
+          "name": "version",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param version [String]\n@return [String] a string representing the increment result",
+      "returnTags": [
+        {
+          "comment": "a string representing the increment result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Versioning#valid?(version)",
+      "class": "Versioning",
+      "method": "valid?",
+      "parameters": [
+        {
+          "name": "version",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param version [String]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "ViewRenderer#render(view, data)",
+      "class": "ViewRenderer",
+      "method": "render",
+      "parameters": [
+        {
+          "name": "view",
+          "type": "String"
+        },
+        {
+          "name": "data",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param view [String]\n@param data [Object]\n@return [String] a string representing the render result",
+      "returnTags": [
+        {
+          "comment": "a string representing the render result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "ViewRenderer#exists?(view)",
+      "class": "ViewRenderer",
+      "method": "exists?",
+      "parameters": [
+        {
+          "name": "view",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param view [String]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Warehouse#store(item)",
+      "class": "Warehouse",
+      "method": "store",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param item [Object]\n@return [Integer] the store result as an integer",
+      "returnTags": [
+        {
+          "comment": "the store result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "Warehouse#retrieve(id)",
+      "class": "Warehouse",
+      "method": "retrieve",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param id [Integer]\n@return [Object] the retrieve result object",
+      "returnTags": [
+        {
+          "comment": "the retrieve result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Workflow#start(name)",
+      "class": "Workflow",
+      "method": "start",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param name [String]\n@return [String] a string representing the start result",
+      "returnTags": [
+        {
+          "comment": "a string representing the start result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Workflow#status(id)",
+      "class": "Workflow",
+      "method": "status",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param id [String]\n@return [String] a string representing the status result",
+      "returnTags": [
+        {
+          "comment": "a string representing the status result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "XMLParser#load(xml)",
+      "class": "XMLParser",
+      "method": "load",
+      "parameters": [
+        {
+          "name": "xml",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param xml [String]\n@return [Object] the load result object",
+      "returnTags": [
+        {
+          "comment": "the load result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "XMLParser#valid?(xml)",
+      "class": "XMLParser",
+      "method": "valid?",
+      "parameters": [
+        {
+          "name": "xml",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param xml [String]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "YAMLParser#parse(yaml)",
+      "class": "YAMLParser",
+      "method": "parse",
+      "parameters": [
+        {
+          "name": "yaml",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param yaml [String]\n@return [Object] the parse result object",
+      "returnTags": [
+        {
+          "comment": "the parse result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "YAMLParser#dump(data)",
+      "class": "YAMLParser",
+      "method": "dump",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param data [Object]\n@return [String] a string representing the dump result",
+      "returnTags": [
+        {
+          "comment": "a string representing the dump result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "ZipTool#compress(content)",
+      "class": "ZipTool",
+      "method": "compress",
+      "parameters": [
+        {
+          "name": "content",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param content [String]\n@return [String] a string representing the compress result",
+      "returnTags": [
+        {
+          "comment": "a string representing the compress result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "ZipTool#extract(zip_data)",
+      "class": "ZipTool",
+      "method": "extract",
+      "parameters": [
+        {
+          "name": "zip_data",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param zip_data [String]\n@return [String] a string representing the extract result",
+      "returnTags": [
+        {
+          "comment": "a string representing the extract result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    }
+  ]
+}

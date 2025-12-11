@@ -1,0 +1,465 @@
+{
+  "dataset_part": [
+    {
+      "signature": "Filter#only_even(numbers)",
+      "class": "Filter",
+      "method": "only_even",
+      "parameters": [
+        {
+          "name": "numbers",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "numbers",
+          "comment": "must be an array",
+          "kind": "PARAM",
+          "condition": "numbers.is_a?(Array)"
+        }
+      ],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param numbers [Array] must be an array\n@return [Array] an array containing the filtered results\n@return [Array] an empty array if no elements match the filter criteria",
+      "returnTags": [
+        {
+          "comment": "an array containing the filtered results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty array if no elements match the filter criteria",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length == 0"
+        }
+      ]
+    },
+    {
+      "signature": "Filter#exclude_nil(values)",
+      "class": "Filter",
+      "method": "exclude_nil",
+      "parameters": [
+        {
+          "name": "values",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param values [Array]\n@return [Array] an array containing the filtered results\n@return [Array] an empty array if no elements match the filter criteria",
+      "returnTags": [
+        {
+          "comment": "an array containing the filtered results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty array if no elements match the filter criteria",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length == 0"
+        }
+      ]
+    },
+    {
+      "signature": "Formatter#capitalize_words(text)",
+      "class": "Formatter",
+      "method": "capitalize_words",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "text",
+          "comment": "must not be nil",
+          "kind": "PARAM",
+          "condition": "text != nil"
+        }
+      ],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String] must not be nil\n@return [String] a string representing the capitalize words result",
+      "returnTags": [
+        {
+          "comment": "a string representing the capitalize words result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Formatter#underscore(text)",
+      "class": "Formatter",
+      "method": "underscore",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [String] a string representing the underscore result",
+      "returnTags": [
+        {
+          "comment": "a string representing the underscore result",
+          "kind": "RETURN",
+          "condition": "return_value.include?(\"_\") || text.include?(\"_\")"
+        }
+      ]
+    },
+    {
+      "signature": "GeoUtils#distance(x1, y1, x2, y2)",
+      "class": "GeoUtils",
+      "method": "distance",
+      "parameters": [
+        {
+          "name": "x1",
+          "type": "Float"
+        },
+        {
+          "name": "y1",
+          "type": "Float"
+        },
+        {
+          "name": "x2",
+          "type": "Float"
+        },
+        {
+          "name": "y2",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param x1 [Float]\n@param y1 [Float]\n@param x2 [Float]\n@param y2 [Float]\n@return [Float] the distance value as a float",
+      "returnTags": [
+        {
+          "comment": "the distance value as a float",
+          "kind": "RETURN",
+          "condition": "return_value >= 0.0"
+        }
+      ]
+    },
+    {
+      "signature": "GeoUtils#midpoint(x1, y1, x2, y2)",
+      "class": "GeoUtils",
+      "method": "midpoint",
+      "parameters": [
+        {
+          "name": "x1",
+          "type": "Float"
+        },
+        {
+          "name": "y1",
+          "type": "Float"
+        },
+        {
+          "name": "x2",
+          "type": "Float"
+        },
+        {
+          "name": "y2",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param x1 [Float]\n@param y1 [Float]\n@param x2 [Float]\n@param y2 [Float]\n@return [Array] an array containing the midpoint results\n@return [Array] an empty array if no results are found",
+      "returnTags": [
+        {
+          "comment": "an array containing the midpoint results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty array if no results are found",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length == 0"
+        }
+      ]
+    },
+    {
+      "signature": "Hasher#md5(text)",
+      "class": "Hasher",
+      "method": "md5",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "text",
+          "comment": "cannot be nil",
+          "kind": "PARAM",
+          "condition": "text != nil"
+        }
+      ],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String] cannot be nil\n@return [String] a string representing the md5 result",
+      "returnTags": [
+        {
+          "comment": "a string representing the md5 result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Hasher#rot13(text)",
+      "class": "Hasher",
+      "method": "rot13",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [String] a string representing the rot13 result",
+      "returnTags": [
+        {
+          "comment": "a string representing the rot13 result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "ImageProcessor#resize(width, height)",
+      "class": "ImageProcessor",
+      "method": "resize",
+      "parameters": [
+        {
+          "name": "width",
+          "type": "Integer"
+        },
+        {
+          "name": "height",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "width",
+          "comment": "must be > 0",
+          "kind": "PARAM",
+          "condition": "width > 0"
+        },
+        {
+          "parameter": "height",
+          "comment": "must be > 0",
+          "kind": "PARAM",
+          "condition": "height > 0"
+        }
+      ],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param width [Integer] must be > 0\n@param height [Integer] must be > 0\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "ImageProcessor#grayscale(image)",
+      "class": "ImageProcessor",
+      "method": "grayscale",
+      "parameters": [
+        {
+          "name": "image",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param image [Object]\n@return [Object] the grayscale result object",
+      "returnTags": [
+        {
+          "comment": "the grayscale result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Inventory#add_stock(item, quantity)",
+      "class": "Inventory",
+      "method": "add_stock",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "String"
+        },
+        {
+          "name": "quantity",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "quantity",
+          "comment": "must be >= 1",
+          "kind": "PARAM",
+          "condition": "quantity >= 1"
+        }
+      ],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param item [String]\n@param quantity [Integer] must be >= 1\n@return [Integer] the add stock result as an integer",
+      "returnTags": [
+        {
+          "comment": "the add stock result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "Inventory#remove_stock(item, quantity)",
+      "class": "Inventory",
+      "method": "remove_stock",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "String"
+        },
+        {
+          "name": "quantity",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "quantity",
+          "comment": "must be >= 1",
+          "kind": "PARAM",
+          "condition": "quantity >= 1"
+        }
+      ],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param item [String]\n@param quantity [Integer] must be >= 1\n@return [Integer] the remove stock result as an integer",
+      "returnTags": [
+        {
+          "comment": "the remove stock result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "IpTools#valid_ipv4?(ip)",
+      "class": "IpTools",
+      "method": "valid_ipv4?",
+      "parameters": [
+        {
+          "name": "ip",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param ip [String]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "IpTools#normalize(ip)",
+      "class": "IpTools",
+      "method": "normalize",
+      "parameters": [
+        {
+          "name": "ip",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param ip [String]\n@return [String] a string representing the normalize result",
+      "returnTags": [
+        {
+          "comment": "a string representing the normalize result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "JsonHelper#encode(data)",
+      "class": "JsonHelper",
+      "method": "encode",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param data [Object]\n@return [String] a string representing the encode result",
+      "returnTags": [
+        {
+          "comment": "a string representing the encode result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "JsonHelper#decode(json)",
+      "class": "JsonHelper",
+      "method": "decode",
+      "parameters": [
+        {
+          "name": "json",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param json [String]\n@return [Object] the decode result object",
+      "returnTags": [
+        {
+          "comment": "the decode result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    }
+  ]
+}

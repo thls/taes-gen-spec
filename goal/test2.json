@@ -1,0 +1,474 @@
+{
+  "dataset_part": [
+    {
+      "signature": "Customer#full_name(first, last)",
+      "class": "Customer",
+      "method": "full_name",
+      "parameters": [
+        {
+          "name": "first",
+          "type": "String"
+        },
+        {
+          "name": "last",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param first [String]\n@param last [String]\n@return [String] a string containing the concatenated first and last name",
+      "returnTags": [
+        {
+          "comment": "a string containing the concatenated first and last name",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Customer#age_group(age)",
+      "class": "Customer",
+      "method": "age_group",
+      "parameters": [
+        {
+          "name": "age",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "age",
+          "comment": "must be >= 0",
+          "kind": "PARAM",
+          "condition": "age >= 0"
+        }
+      ],
+      "returnType": "String",
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param age is negative",
+          "kind": "THROWS",
+          "condition": "age < 0"
+        }
+      ],
+      "doc": "@param age [Integer] must be >= 0\n@return [String] a string representing the age category or group based on the age value\n@raise [ArgumentError] the param age is negative",
+      "returnTags": [
+        {
+          "comment": "a string representing the age category or group based on the age value",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "DataParser#parse_int(value)",
+      "class": "DataParser",
+      "method": "parse_int",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param value cannot be parsed as an integer",
+          "kind": "THROWS",
+          "condition": "value.to_i.to_s != value"
+        }
+      ],
+      "doc": "@param value [String]\n@return [Integer] the parse int result as an integer\n@raise [ArgumentError] the param value cannot be parsed as an integer",
+      "returnTags": [
+        {
+          "comment": "the parse int result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "DataParser#parse_float(value)",
+      "class": "DataParser",
+      "method": "parse_float",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param value [String]\n@return [Float] the parse float result as a float",
+      "returnTags": [
+        {
+          "comment": "the parse float result as a float",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Float)"
+        }
+      ]
+    },
+    {
+      "signature": "Directory#list_files(path)",
+      "class": "Directory",
+      "method": "list_files",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "path",
+          "comment": "cannot be empty",
+          "kind": "PARAM",
+          "condition": "path != \"\""
+        }
+      ],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param path [String] cannot be empty\n@return [Array] an array containing all list files results\n@return [Array] an empty array if no results are found",
+      "returnTags": [
+        {
+          "comment": "an array containing all list files results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array)"
+        },
+        {
+          "comment": "an empty array if no results are found",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length == 0"
+        }
+      ]
+    },
+    {
+      "signature": "Directory#create(path)",
+      "class": "Directory",
+      "method": "create",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param path [String]\n@return [Boolean] true if the resource was successfully created\n@return [Boolean] false if creation failed",
+      "returnTags": [
+        {
+          "comment": "true if the resource was successfully created",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if creation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "EmailService#send_email(to, subject, body)",
+      "class": "EmailService",
+      "method": "send_email",
+      "parameters": [
+        {
+          "name": "to",
+          "type": "String"
+        },
+        {
+          "name": "subject",
+          "type": "String"
+        },
+        {
+          "name": "body",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "to",
+          "comment": "must include @",
+          "kind": "PARAM",
+          "condition": "to.include?(\"@\")"
+        }
+      ],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param to [String] must include @\n@param subject [String]\n@param body [String]\n@return [Boolean] true if the email was successfully sent\n@return [Boolean] false if sending failed",
+      "returnTags": [
+        {
+          "comment": "true if the email was successfully sent",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if sending failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "EmailService#queue_email(to, body)",
+      "class": "EmailService",
+      "method": "queue_email",
+      "parameters": [
+        {
+          "name": "to",
+          "type": "String"
+        },
+        {
+          "name": "body",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "NilClass",
+      "throwsTags": [],
+      "doc": "@param to [String]\n@param body [String]\n@return [NilClass] nil after the operation completes",
+      "returnTags": [
+        {
+          "comment": "nil after the operation completes",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "Encryptor#sha256(text)",
+      "class": "Encryptor",
+      "method": "sha256",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "text",
+          "comment": "cannot be nil",
+          "kind": "PARAM",
+          "condition": "text != nil"
+        }
+      ],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String] cannot be nil\n@return [String] a string representing the sha256 result",
+      "returnTags": [
+        {
+          "comment": "a string representing the sha256 result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Encryptor#base64(text)",
+      "class": "Encryptor",
+      "method": "base64",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [String] a string representing the base64 result",
+      "returnTags": [
+        {
+          "comment": "a string representing the base64 result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "EventBus#publish(event, payload)",
+      "class": "EventBus",
+      "method": "publish",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "String"
+        },
+        {
+          "name": "payload",
+          "type": "Hash"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param event [String]\n@param payload [Hash]\n@return [Boolean] true if the event was successfully published\n@return [Boolean] false if publishing failed",
+      "returnTags": [
+        {
+          "comment": "true if the event was successfully published",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if publishing failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "EventBus#subscribe(event, handler)",
+      "class": "EventBus",
+      "method": "subscribe",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "String"
+        },
+        {
+          "name": "handler",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "NilClass",
+      "throwsTags": [],
+      "doc": "@param event [String]\n@param handler [Object]\n@return [NilClass] nil after the operation completes",
+      "returnTags": [
+        {
+          "comment": "nil after the operation completes",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "FileReader#read(path)",
+      "class": "FileReader",
+      "method": "read",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "path",
+          "comment": "cannot be empty",
+          "kind": "PARAM",
+          "condition": "path != \"\""
+        }
+      ],
+      "returnType": "String",
+      "throwsTags": [
+        {
+          "exceptionType": "Errno::ENOENT",
+          "comment": "the file at the param path does not exist",
+          "kind": "THROWS",
+          "condition": "!File.exist?(path)"
+        }
+      ],
+      "doc": "@param path [String] cannot be empty\n@return [String] the response body or content as a string\n@raise [Errno::ENOENT] the file at the param path does not exist",
+      "returnTags": [
+        {
+          "comment": "the response body or content as a string",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "FileReader#exists?(path)",
+      "class": "FileReader",
+      "method": "exists?",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param path [String]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "FileWriter#write(path, text)",
+      "class": "FileWriter",
+      "method": "write",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        },
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param path [String]\n@param text [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "FileWriter#append(path, text)",
+      "class": "FileWriter",
+      "method": "append",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String"
+        },
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "NilClass",
+      "throwsTags": [],
+      "doc": "@param path [String]\n@param text [String]\n@return [NilClass] nil after the operation completes",
+      "returnTags": [
+        {
+          "comment": "nil after the operation completes",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    }
+  ]
+}

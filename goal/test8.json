@@ -1,0 +1,626 @@
+{
+  "dataset_part": [
+    {
+      "signature": "TagParser#extract(text)",
+      "class": "TagParser",
+      "method": "extract",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [Array] an array containing the extract results\n@return [Array] an empty array if no results are found",
+      "returnTags": [
+        {
+          "comment": "an array containing the extract results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty array if no results are found",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length == 0"
+        }
+      ]
+    },
+    {
+      "signature": "TagParser#valid?(tag)",
+      "class": "TagParser",
+      "method": "valid?",
+      "parameters": [
+        {
+          "name": "tag",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param tag [String]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "TaskManager#add(task)",
+      "class": "TaskManager",
+      "method": "add",
+      "parameters": [
+        {
+          "name": "task",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param task [Object]\n@return [Integer] the add result as an integer",
+      "returnTags": [
+        {
+          "comment": "the add result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "TaskManager#run(id)",
+      "class": "TaskManager",
+      "method": "run",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param id [Integer]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "TaxCalculator#apply(amount, rate)",
+      "class": "TaxCalculator",
+      "method": "apply",
+      "parameters": [
+        {
+          "name": "amount",
+          "type": "Float"
+        },
+        {
+          "name": "rate",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "rate",
+          "comment": "0..1",
+          "kind": "PARAM",
+          "condition": "rate >= 0 && rate <= 1"
+        }
+      ],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param amount [Float]\n@param rate [Float] 0..1\n@return [Float] the apply result as a float",
+      "returnTags": [
+        {
+          "comment": "the apply result as a float",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Float)"
+        }
+      ]
+    },
+    {
+      "signature": "TemplateEngine#render(template, vars)",
+      "class": "TemplateEngine",
+      "method": "render",
+      "parameters": [
+        {
+          "name": "template",
+          "type": "String"
+        },
+        {
+          "name": "vars",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param template [String]\n@param vars [Object]\n@return [String] a string representing the render result",
+      "returnTags": [
+        {
+          "comment": "a string representing the render result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "TextAnalyzer#words(text)",
+      "class": "TextAnalyzer",
+      "method": "words",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [Array] an array containing the words results\n@return [Array] an empty array if no results are found",
+      "returnTags": [
+        {
+          "comment": "an array containing the words results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty array if no results are found",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length == 0"
+        }
+      ]
+    },
+    {
+      "signature": "TextAnalyzer#count(text)",
+      "class": "TextAnalyzer",
+      "method": "count",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [Integer] an integer representing the count result\n@return [Integer] 0 if the count is zero or no items exist",
+      "returnTags": [
+        {
+          "comment": "an integer representing the count result",
+          "kind": "RETURN",
+          "condition": "return_value >= 0"
+        },
+        {
+          "comment": "0 if the count is zero or no items exist",
+          "kind": "RETURN",
+          "condition": "return_value == 0"
+        }
+      ]
+    },
+    {
+      "signature": "TimeUtils#now()",
+      "class": "TimeUtils",
+      "method": "now",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "Time",
+      "throwsTags": [],
+      "doc": "@return [Time] current time",
+      "returnTags": [
+        {
+          "comment": "current time",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Time)"
+        }
+      ]
+    },
+    {
+      "signature": "TimeUtils#seconds_between(a, b)",
+      "class": "TimeUtils",
+      "method": "seconds_between",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Time"
+        },
+        {
+          "name": "b",
+          "type": "Time"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param a [Time]\n@param b [Time]\n@return [Integer] an integer representing the seconds between result",
+      "returnTags": [
+        {
+          "comment": "an integer representing the seconds between result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "Tokenizer#split(text, sep)",
+      "class": "Tokenizer",
+      "method": "split",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        },
+        {
+          "name": "sep",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@param sep [String]\n@return [Array] an array containing the split results\n@return [Array] an empty array if no results are found",
+      "returnTags": [
+        {
+          "comment": "an array containing the split results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty array if no results are found",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length == 0"
+        }
+      ]
+    },
+    {
+      "signature": "Tokenizer#tokens(text)",
+      "class": "Tokenizer",
+      "method": "tokens",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@return [Array] an array containing the tokens results\n@return [Array] an empty array if no results are found",
+      "returnTags": [
+        {
+          "comment": "an array containing the tokens results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty array if no results are found",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length == 0"
+        }
+      ]
+    },
+    {
+      "signature": "Transaction#commit(data)",
+      "class": "Transaction",
+      "method": "commit",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param data [Object]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Transaction#rollback(reason)",
+      "class": "Transaction",
+      "method": "rollback",
+      "parameters": [
+        {
+          "name": "reason",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "NilClass",
+      "throwsTags": [],
+      "doc": "@param reason [String]\n@return [NilClass] nil after the operation completes",
+      "returnTags": [
+        {
+          "comment": "nil after the operation completes",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "Translator#translate(text, lang)",
+      "class": "Translator",
+      "method": "translate",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "String"
+        },
+        {
+          "name": "lang",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param text [String]\n@param lang [String]\n@return [String] a string representing the translate result",
+      "returnTags": [
+        {
+          "comment": "a string representing the translate result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "Translator#supported?(lang)",
+      "class": "Translator",
+      "method": "supported?",
+      "parameters": [
+        {
+          "name": "lang",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param lang [String]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "TreeUtils#height(tree)",
+      "class": "TreeUtils",
+      "method": "height",
+      "parameters": [
+        {
+          "name": "tree",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param tree [Object]\n@return [Integer] the height result as an integer",
+      "returnTags": [
+        {
+          "comment": "the height result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "TreeUtils#balanced?(tree)",
+      "class": "TreeUtils",
+      "method": "balanced?",
+      "parameters": [
+        {
+          "name": "tree",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param tree [Object]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "URLHelper#encode(url)",
+      "class": "URLHelper",
+      "method": "encode",
+      "parameters": [
+        {
+          "name": "url",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param url [String]\n@return [String] the encode result as a string",
+      "returnTags": [
+        {
+          "comment": "the encode result as a string",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "URLHelper#decode(url)",
+      "class": "URLHelper",
+      "method": "decode",
+      "parameters": [
+        {
+          "name": "url",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param url [String]\n@return [String] the decode result as a string",
+      "returnTags": [
+        {
+          "comment": "the decode result as a string",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "UserManager#create(email)",
+      "class": "UserManager",
+      "method": "create",
+      "parameters": [
+        {
+          "name": "email",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "email",
+          "comment": "must include @",
+          "kind": "PARAM",
+          "condition": "email.include?(\"@\")"
+        }
+      ],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param email [String] must include @\n@return [Integer] the create result as an integer",
+      "returnTags": [
+        {
+          "comment": "the create result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "UserManager#delete(id)",
+      "class": "UserManager",
+      "method": "delete",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param id [Integer]\n@return [Boolean] true if the resource was successfully deleted\n@return [Boolean] false if deletion failed or the resource does not exist",
+      "returnTags": [
+        {
+          "comment": "true if the resource was successfully deleted",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if deletion failed or the resource does not exist",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Validator#presence(value)",
+      "class": "Validator",
+      "method": "presence",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param value [Object]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Validator#numeric?(val)",
+      "class": "Validator",
+      "method": "numeric?",
+      "parameters": [
+        {
+          "name": "val",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param val [Object]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    }
+  ]
+}

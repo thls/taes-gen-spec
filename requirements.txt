@@ -1,0 +1,6 @@
+sentence_transformers
+openai
+python-dotenv
+torch
+requests
+

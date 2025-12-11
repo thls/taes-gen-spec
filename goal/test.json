@@ -1,0 +1,544 @@
+{
+  "dataset_part": [
+    {
+      "signature": "AccountManager#create_account(username, email)",
+      "class": "AccountManager",
+      "method": "create_account",
+      "parameters": [
+        {
+          "name": "username",
+          "type": "String"
+        },
+        {
+          "name": "email",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "username",
+          "comment": "must not be empty",
+          "kind": "PARAM",
+          "condition": "username != nil && username != \"\""
+        },
+        {
+          "parameter": "email",
+          "comment": "must contain @",
+          "kind": "PARAM",
+          "condition": "email.include?(\"@\")"
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the created account information",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash)"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param email does not have the '@' character in itself",
+          "kind": "THROWS",
+          "condition": "!email.include?(\"@\")"
+        }
+      ],
+      "doc": "@param username [String] must not be empty\n@param email [String] must contain @\n@return [Hash] a hash containing the created account information\n@raise [ArgumentError] the param email does not have the '@' character in itself"
+    },
+    {
+      "signature": "AccountManager#suspend_account(user_id)",
+      "class": "AccountManager",
+      "method": "suspend_account",
+      "parameters": [
+        {
+          "name": "user_id",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "user_id",
+          "comment": "must be positive",
+          "kind": "PARAM",
+          "condition": "user_id > 0"
+        }
+      ],
+      "returnType": "Boolean",
+      "returnTags": [
+        {
+          "comment": "true if the account was successfully suspended",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the user_id does not exist or the suspension failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ],
+      "throwsTags": [],
+      "doc": "@param user_id [Integer] must be positive\n@return [Boolean] true if the account was successfully suspended\n@return [Boolean] false if the user_id does not exist or the suspension failed"
+    },
+    {
+      "signature": "AddressBook#add_contact(name, phone)",
+      "class": "AddressBook",
+      "method": "add_contact",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String"
+        },
+        {
+          "name": "phone",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "name",
+          "comment": "cannot be empty",
+          "kind": "PARAM",
+          "condition": "name != \"\""
+        }
+      ],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the newly created contact information",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash)"
+        }
+      ],
+      "throwsTags": [],
+      "doc": "@param name [String] cannot be empty\n@param phone [String]\n@return [Hash] a hash containing the newly created contact information"
+    },
+    {
+      "signature": "AddressBook#find_contact(name)",
+      "class": "AddressBook",
+      "method": "find_contact",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Hash",
+      "returnTags": [
+        {
+          "comment": "a hash containing the contact information if found",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Hash)"
+        },
+        {
+          "comment": "nil if no contact with the given name exists",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ],
+      "throwsTags": [],
+      "doc": "@param name [String]\n@return [Hash, nil] a hash containing the contact information if found\n@return [nil] nil if no contact with the given name exists"
+    },
+    {
+      "signature": "ApiClient#get(url)",
+      "class": "ApiClient",
+      "method": "get",
+      "parameters": [
+        {
+          "name": "url",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "url",
+          "comment": "must start with http",
+          "kind": "PARAM",
+          "condition": "url.start_with?(\"http\")"
+        }
+      ],
+      "returnType": "String",
+      "returnTags": [
+        {
+          "comment": "the response body as a string from the HTTP request",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param url does not start with 'http'",
+          "kind": "THROWS",
+          "condition": "!url.start_with?(\"http\")"
+        }
+      ],
+      "doc": "@param url [String] must start with http\n@return [String] the response body as a string from the HTTP request\n@raise [ArgumentError] the param url does not start with 'http'"
+    },
+    {
+      "signature": "ApiClient#post(url, payload)",
+      "class": "ApiClient",
+      "method": "post",
+      "parameters": [
+        {
+          "name": "url",
+          "type": "String"
+        },
+        {
+          "name": "payload",
+          "type": "Hash"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "payload",
+          "comment": "must be a hash",
+          "kind": "PARAM",
+          "condition": "payload.is_a?(Hash)"
+        }
+      ],
+      "returnType": "String",
+      "returnTags": [
+        {
+          "comment": "the response body as a string from the HTTP request",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ],
+      "throwsTags": [],
+      "doc": "@param url [String]\n@param payload [Hash] must be a hash\n@return [String] the response body as a string from the HTTP request"
+    },
+    {
+      "signature": "Authenticator#login(email, password)",
+      "class": "Authenticator",
+      "method": "login",
+      "parameters": [
+        {
+          "name": "email",
+          "type": "String"
+        },
+        {
+          "name": "password",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "email",
+          "comment": "must include @",
+          "kind": "PARAM",
+          "condition": "email.include?(\"@\")"
+        }
+      ],
+      "returnType": "Boolean",
+      "returnTags": [
+        {
+          "comment": "true if the email and password are valid and authentication succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the credentials are invalid or the user does not exist",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ],
+      "throwsTags": [],
+      "doc": "@param email [String] must include @\n@param password [String]\n@return [Boolean] true if the email and password are valid and authentication succeeded\n@return [Boolean] false if the credentials are invalid or the user does not exist"
+    },
+    {
+      "signature": "BillingService#charge(amount, currency)",
+      "class": "BillingService",
+      "method": "charge",
+      "parameters": [
+        {
+          "name": "amount",
+          "type": "Float"
+        },
+        {
+          "name": "currency",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "amount",
+          "comment": "must be > 0",
+          "kind": "PARAM",
+          "condition": "amount > 0"
+        }
+      ],
+      "returnType": "Boolean",
+      "returnTags": [
+        {
+          "comment": "true if the charge was successfully processed",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the charge failed due to insufficient funds or payment gateway error",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param amount is less than or equal to zero",
+          "kind": "THROWS",
+          "condition": "amount <= 0"
+        }
+      ],
+      "doc": "@param amount [Float] must be > 0\n@param currency [String]\n@return [Boolean] true if the charge was successfully processed\n@return [Boolean] false if the charge failed due to insufficient funds or payment gateway error\n@raise [ArgumentError] the param amount is less than or equal to zero"
+    },
+    {
+      "signature": "BillingService#refund(transaction_id)",
+      "class": "BillingService",
+      "method": "refund",
+      "parameters": [
+        {
+          "name": "transaction_id",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "returnTags": [
+        {
+          "comment": "true if the refund was successfully processed",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the transaction_id does not exist or the refund failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ],
+      "throwsTags": [],
+      "doc": "@param transaction_id [String]\n@return [Boolean] true if the refund was successfully processed\n@return [Boolean] false if the transaction_id does not exist or the refund failed"
+    },
+    {
+      "signature": "Cart#add_item(product_id, quantity)",
+      "class": "Cart",
+      "method": "add_item",
+      "parameters": [
+        {
+          "name": "product_id",
+          "type": "Integer"
+        },
+        {
+          "name": "quantity",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "quantity",
+          "comment": "must be >= 1",
+          "kind": "PARAM",
+          "condition": "quantity >= 1"
+        }
+      ],
+      "returnType": "NilClass",
+      "returnTags": [
+        {
+          "comment": "nil after successfully adding the item to the cart",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param quantity is less than 1",
+          "kind": "THROWS",
+          "condition": "quantity < 1"
+        }
+      ],
+      "doc": "@param product_id [Integer]\n@param quantity [Integer] must be >= 1\n@return [NilClass] nil after successfully adding the item to the cart\n@raise [ArgumentError] the param quantity is less than 1"
+    },
+    {
+      "signature": "Cart#remove_item(product_id)",
+      "class": "Cart",
+      "method": "remove_item",
+      "parameters": [
+        {
+          "name": "product_id",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "NilClass",
+      "returnTags": [
+        {
+          "comment": "nil after successfully removing the item from the cart",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ],
+      "throwsTags": [],
+      "doc": "@param product_id [Integer]\n@return [NilClass] nil after successfully removing the item from the cart"
+    },
+    {
+      "signature": "Cart#total_price()",
+      "class": "Cart",
+      "method": "total_price",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "Float",
+      "returnTags": [
+        {
+          "comment": "the total price of all items in the cart as a float",
+          "kind": "RETURN",
+          "condition": "return_value > 0"
+        },
+        {
+          "comment": "0.0 if the cart is empty",
+          "kind": "RETURN",
+          "condition": "return_value == 0.0"
+        }
+      ],
+      "throwsTags": [],
+      "doc": "@return [Float] the total price of all items in the cart as a float\n@return [Float] 0.0 if the cart is empty"
+    },
+    {
+      "signature": "CacheStore#set(key, value)",
+      "class": "CacheStore",
+      "method": "set",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        },
+        {
+          "name": "value",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "key",
+          "comment": "cannot be empty",
+          "kind": "PARAM",
+          "condition": "key != \"\""
+        }
+      ],
+      "returnType": "Boolean",
+      "returnTags": [
+        {
+          "comment": "true if the key-value pair was successfully stored in the cache",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the storage operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ],
+      "throwsTags": [],
+      "doc": "@param key [String] cannot be empty\n@param value [Object]\n@return [Boolean] true if the key-value pair was successfully stored in the cache\n@return [Boolean] false if the storage operation failed"
+    },
+    {
+      "signature": "CacheStore#get(key)",
+      "class": "CacheStore",
+      "method": "get",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "returnTags": [
+        {
+          "comment": "the cached value associated with the key if it exists",
+          "kind": "RETURN",
+          "condition": "return_value != nil"
+        },
+        {
+          "comment": "nil if the key does not exist in the cache",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ],
+      "throwsTags": [],
+      "doc": "@param key [String]\n@return [Object, nil] the cached value associated with the key if it exists\n@return [nil] nil if the key does not exist in the cache"
+    },
+    {
+      "signature": "Checkout#apply_coupon(total, code)",
+      "class": "Checkout",
+      "method": "apply_coupon",
+      "parameters": [
+        {
+          "name": "total",
+          "type": "Float"
+        },
+        {
+          "name": "code",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "returnTags": [
+        {
+          "comment": "the total amount after applying the discount if the coupon code is valid",
+          "kind": "RETURN",
+          "condition": "return_value < total && return_value >= 0"
+        },
+        {
+          "comment": "the original total amount if the coupon code is invalid or expired",
+          "kind": "RETURN",
+          "condition": "return_value == total"
+        }
+      ],
+      "throwsTags": [],
+      "doc": "@param total [Float]\n@param code [String]\n@return [Float] the total amount after applying the discount if the coupon code is valid\n@return [Float] the original total amount if the coupon code is invalid or expired"
+    },
+    {
+      "signature": "Checkout#finalize(total)",
+      "class": "Checkout",
+      "method": "finalize",
+      "parameters": [
+        {
+          "name": "total",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "total",
+          "comment": "must be >= 0",
+          "kind": "PARAM",
+          "condition": "total >= 0"
+        }
+      ],
+      "returnType": "Boolean",
+      "returnTags": [
+        {
+          "comment": "true if the purchase was successfully finalized and completed",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the finalization failed due to payment error or insufficient inventory",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ],
+      "throwsTags": [
+        {
+          "exceptionType": "ArgumentError",
+          "comment": "the param total is negative",
+          "kind": "THROWS",
+          "condition": "total < 0"
+        }
+      ],
+      "doc": "@param total [Float] must be >= 0\n@return [Boolean] true if the purchase was successfully finalized and completed\n@return [Boolean] false if the finalization failed due to payment error or insufficient inventory\n@raise [ArgumentError] the param total is negative"
+    }
+  ]
+}

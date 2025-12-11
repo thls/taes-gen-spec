@@ -1,0 +1,759 @@
+{
+  "dataset_part": [
+    {
+      "signature": "AccountUtils#open(balance)",
+      "class": "AccountUtils",
+      "method": "open",
+      "parameters": [
+        {
+          "name": "balance",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "balance",
+          "comment": "must be >= 0",
+          "kind": "PARAM",
+          "condition": "balance >= 0.0"
+        }
+      ],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param balance [Float] must be >= 0\n@return [Object] the open result object",
+      "returnTags": [
+        {
+          "comment": "the open result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "AccountUtils#close(account)",
+      "class": "AccountUtils",
+      "method": "close",
+      "parameters": [
+        {
+          "name": "account",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param account [Object]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "ArrayUtils#first(array)",
+      "class": "ArrayUtils",
+      "method": "first",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param array [Array]\n@return [Object, nil] first element or nil",
+      "returnTags": [
+        {
+          "comment": "first element or nil",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "ArrayUtils#last(array)",
+      "class": "ArrayUtils",
+      "method": "last",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "Array"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param array [Array]\n@return [Object] the last result object",
+      "returnTags": [
+        {
+          "comment": "the last result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "AuditLog#record(action, user)",
+      "class": "AuditLog",
+      "method": "record",
+      "parameters": [
+        {
+          "name": "action",
+          "type": "String"
+        },
+        {
+          "name": "user",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Time",
+      "throwsTags": [],
+      "doc": "@param action [String]\n@param user [String]\n@return [Time] timestamp of record",
+      "returnTags": [
+        {
+          "comment": "timestamp of record",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Time)"
+        }
+      ]
+    },
+    {
+      "signature": "AuditLog#entries(limit)",
+      "class": "AuditLog",
+      "method": "entries",
+      "parameters": [
+        {
+          "name": "limit",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "limit",
+          "comment": "must be > 0",
+          "kind": "PARAM",
+          "condition": "limit > 0"
+        }
+      ],
+      "returnType": "Array",
+      "throwsTags": [],
+      "doc": "@param limit [Integer] must be > 0\n@return [Array] an array containing the entries results\n@return [Array] an empty array if no results are found",
+      "returnTags": [
+        {
+          "comment": "an array containing the entries results",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length > 0"
+        },
+        {
+          "comment": "an empty array if no results are found",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Array) && return_value.length == 0"
+        }
+      ]
+    },
+    {
+      "signature": "BalanceChecker#positive?(value)",
+      "class": "BalanceChecker",
+      "method": "positive?",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param value [Float]\n@return [Boolean] true if >= 0",
+      "returnTags": [
+        {
+          "comment": "true if >= 0",
+          "kind": "RETURN",
+          "condition": "return_value == (value >= 0.0)"
+        }
+      ]
+    },
+    {
+      "signature": "BalanceChecker#negative?(value)",
+      "class": "BalanceChecker",
+      "method": "negative?",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param value [Float]\n@return [Boolean] true if < 0",
+      "returnTags": [
+        {
+          "comment": "true if < 0",
+          "kind": "RETURN",
+          "condition": "return_value == (value < 0.0)"
+        }
+      ]
+    },
+    {
+      "signature": "Browser#open(url)",
+      "class": "Browser",
+      "method": "open",
+      "parameters": [
+        {
+          "name": "url",
+          "type": "String"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "url",
+          "comment": "must start with http",
+          "kind": "PARAM",
+          "condition": "url.start_with?(\"http\")"
+        }
+      ],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param url [String] must start with http\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Browser#back()",
+      "class": "Browser",
+      "method": "back",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "NilClass",
+      "throwsTags": [],
+      "doc": "@return [NilClass] nil after the operation completes",
+      "returnTags": [
+        {
+          "comment": "nil after the operation completes",
+          "kind": "RETURN",
+          "condition": "return_value.nil?"
+        }
+      ]
+    },
+    {
+      "signature": "CalcEngine#add(a, b)",
+      "class": "CalcEngine",
+      "method": "add",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Float"
+        },
+        {
+          "name": "b",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param a [Float]\n@param b [Float]\n@return [Float] the add result as a float",
+      "returnTags": [
+        {
+          "comment": "the add result as a float",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Float)"
+        }
+      ]
+    },
+    {
+      "signature": "CalcEngine#divide(a, b)",
+      "class": "CalcEngine",
+      "method": "divide",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Float"
+        },
+        {
+          "name": "b",
+          "type": "Float"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "b",
+          "comment": "must not be 0",
+          "kind": "PARAM",
+          "condition": "b != 0.0"
+        }
+      ],
+      "returnType": "Float",
+      "throwsTags": [
+        {
+          "exceptionType": "ZeroDivisionError",
+          "comment": "the param b is zero",
+          "kind": "THROWS",
+          "condition": "b == 0.0"
+        }
+      ],
+      "doc": "@param a [Float]\n@param b [Float] must not be 0\n@return [Float] the divide result as a float\n@raise [ZeroDivisionError] the param b is zero",
+      "returnTags": [
+        {
+          "comment": "the divide result as a float",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Float)"
+        }
+      ]
+    },
+    {
+      "signature": "DateUtils#today()",
+      "class": "DateUtils",
+      "method": "today",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "Date",
+      "throwsTags": [],
+      "doc": "@return [Date] current date",
+      "returnTags": [
+        {
+          "comment": "current date",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Date)"
+        }
+      ]
+    },
+    {
+      "signature": "DateUtils#parse(date_str)",
+      "class": "DateUtils",
+      "method": "parse",
+      "parameters": [
+        {
+          "name": "date_str",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Date",
+      "throwsTags": [],
+      "doc": "@param date_str [String]\n@return [Date] parsed date",
+      "returnTags": [
+        {
+          "comment": "parsed date",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Date)"
+        }
+      ]
+    },
+    {
+      "signature": "Env#fetch(key, default)",
+      "class": "Env",
+      "method": "fetch",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        },
+        {
+          "name": "default",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param key [String]\n@param default [Object]\n@return [Object] the fetch result object",
+      "returnTags": [
+        {
+          "comment": "the fetch result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "Env#exists?(key)",
+      "class": "Env",
+      "method": "exists?",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param key [String]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "FeatureFlag#enabled?(name)",
+      "class": "FeatureFlag",
+      "method": "enabled?",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param name [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "FeatureFlag#set(name, value)",
+      "class": "FeatureFlag",
+      "method": "set",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String"
+        },
+        {
+          "name": "value",
+          "type": "Boolean"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param name [String]\n@param value [Boolean]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "Geo#distance(a, b)",
+      "class": "Geo",
+      "method": "distance",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Object"
+        },
+        {
+          "name": "b",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Float",
+      "throwsTags": [],
+      "doc": "@param a [Object]\n@param b [Object]\n@return [Float] the distance value as a float",
+      "returnTags": [
+        {
+          "comment": "the distance value as a float",
+          "kind": "RETURN",
+          "condition": "return_value >= 0.0"
+        }
+      ]
+    },
+    {
+      "signature": "Geo#inside?(point, area)",
+      "class": "Geo",
+      "method": "inside?",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "Object"
+        },
+        {
+          "name": "area",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param point [Object]\n@param area [Object]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "IdGenerator#uuid()",
+      "class": "IdGenerator",
+      "method": "uuid",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@return [String] a string representing the uuid result",
+      "returnTags": [
+        {
+          "comment": "a string representing the uuid result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "IdGenerator#short_id()",
+      "class": "IdGenerator",
+      "method": "short_id",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@return [String] a string representing the short id result",
+      "returnTags": [
+        {
+          "comment": "a string representing the short id result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "JobQueue#enqueue(job)",
+      "class": "JobQueue",
+      "method": "enqueue",
+      "parameters": [
+        {
+          "name": "job",
+          "type": "Object"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param job [Object]\n@return [Integer] the enqueue result as an integer",
+      "returnTags": [
+        {
+          "comment": "the enqueue result as an integer",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(Integer)"
+        }
+      ]
+    },
+    {
+      "signature": "JobQueue#dequeue()",
+      "class": "JobQueue",
+      "method": "dequeue",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@return [Object] the dequeue result object",
+      "returnTags": [
+        {
+          "comment": "the dequeue result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "LocaleUtils#normalize(code)",
+      "class": "LocaleUtils",
+      "method": "normalize",
+      "parameters": [
+        {
+          "name": "code",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "String",
+      "throwsTags": [],
+      "doc": "@param code [String]\n@return [String] a string representing the normalize result",
+      "returnTags": [
+        {
+          "comment": "a string representing the normalize result",
+          "kind": "RETURN",
+          "condition": "return_value.is_a?(String)"
+        }
+      ]
+    },
+    {
+      "signature": "LocaleUtils#supported?(code)",
+      "class": "LocaleUtils",
+      "method": "supported?",
+      "parameters": [
+        {
+          "name": "code",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param code [String]\n@return [Boolean] true if the condition is met\n@return [Boolean] false if the condition is not met",
+      "returnTags": [
+        {
+          "comment": "true if the condition is met",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the condition is not met",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "PasswordPolicy#strong?(password)",
+      "class": "PasswordPolicy",
+      "method": "strong?",
+      "parameters": [
+        {
+          "name": "password",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@param password [String]\n@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    },
+    {
+      "signature": "PasswordPolicy#length(password)",
+      "class": "PasswordPolicy",
+      "method": "length",
+      "parameters": [
+        {
+          "name": "password",
+          "type": "String"
+        }
+      ],
+      "paramTags": [],
+      "returnType": "Integer",
+      "throwsTags": [],
+      "doc": "@param password [String]\n@return [Integer] the length count as an integer\n@return [Integer] an integer representing the length result",
+      "returnTags": [
+        {
+          "comment": "the length count as an integer",
+          "kind": "RETURN",
+          "condition": "return_value >= 0"
+        },
+        {
+          "comment": "an integer representing the length result",
+          "kind": "RETURN",
+          "condition": "return_value == 0"
+        }
+      ]
+    },
+    {
+      "signature": "RetryPolicy#attempts(count)",
+      "class": "RetryPolicy",
+      "method": "attempts",
+      "parameters": [
+        {
+          "name": "count",
+          "type": "Integer"
+        }
+      ],
+      "paramTags": [
+        {
+          "parameter": "count",
+          "comment": "must be >= 1",
+          "kind": "PARAM",
+          "condition": "count >= 1"
+        }
+      ],
+      "returnType": "Object",
+      "throwsTags": [],
+      "doc": "@param count [Integer] must be >= 1\n@return [Object] the attempts result object",
+      "returnTags": [
+        {
+          "comment": "the attempts result object",
+          "kind": "RETURN",
+          "condition": "true"
+        }
+      ]
+    },
+    {
+      "signature": "RetryPolicy#enabled?()",
+      "class": "RetryPolicy",
+      "method": "enabled?",
+      "parameters": [],
+      "paramTags": [],
+      "returnType": "Boolean",
+      "throwsTags": [],
+      "doc": "@return [Boolean] true if the operation succeeded\n@return [Boolean] false if the operation failed",
+      "returnTags": [
+        {
+          "comment": "true if the operation succeeded",
+          "kind": "RETURN",
+          "condition": "return_value == true"
+        },
+        {
+          "comment": "false if the operation failed",
+          "kind": "RETURN",
+          "condition": "return_value == false"
+        }
+      ]
+    }
+  ]
+}
